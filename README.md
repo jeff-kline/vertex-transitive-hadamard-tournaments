@@ -2,10 +2,11 @@
 
 Jeffery Kline
 
-**Status: draft.** This repository is being prepared for release under the
-project's
-[public research standard](https://jeff-kline.github.io/posts/research-program/index.html).
-No version has been released and no DOI exists yet.
+**Status: release candidate for version 0.1.0.** The claims are frozen
+and audited (see [ADMISSION.md](ADMISSION.md)). There is no tag, archive or
+DOI yet, so there is no stable citation. Admission under the project's
+[public research standard](https://jeff-kline.github.io/posts/research-program/index.html)
+is a release decision, not peer review or a correctness certificate.
 
 The paper is [paper/main.pdf](paper/main.pdf); its source is
 [paper/main.tex](paper/main.tex).

@@ -1,8 +1,10 @@
 # Admission record
 
-**Current state:** DRAFT
+**Current state:** CANDIDATE
 
-**Version:** 0.1.0 (planned)
+**Verdict:** NOT YET ADMITTED
+
+**Version:** 0.1.0 (release candidate)
 
 **Standard:** [A Public Standard for This Work](https://jeff-kline.github.io/posts/research-program/index.html)
 
