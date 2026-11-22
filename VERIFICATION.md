@@ -46,4 +46,4 @@ rules shown here were rerun, not re-implemented.
 `make paper` builds [paper/main.pdf](paper/main.pdf) in three passes with
 `SOURCE_DATE_EPOCH` fixed. Two builds give identical bytes.
 
-PDF SHA-256: `3de182fe72225d701c9f734cdfeeb50f03f2e5e8bdc953e42610c23c056e0625`
+PDF SHA-256: `c177846af27193ac998e32f64587eae3eeb23f60a9746878d3f85ac6b85c25e4`
