@@ -10,7 +10,8 @@ Admission is a project release decision. It is not peer review, a correctness
 certificate, or proof of global novelty.
 
 **Scope set by the author.** The mathematics was frozen by the author on
-2026-11-22. The abstract and README introduction await the author's approval.
+2026-11-22. The author approved the abstract and README introduction and the
+title on 2026-11-22.
 
 ## Principal claims
 
@@ -31,5 +32,5 @@ certificate, or proof of global novelty.
 | Gate | Status |
 |---|---|
 | P1 prior work | searches of 21 and 22 Nov 2026 recorded; Google Scholar and MathSciNet not searched (accepted by the author on 2026-11-22); scan to be repeated before tagging |
-| A1 consistency | open: release audits not yet run |
+| A1 consistency | PASS: claims-consistency audit and full cold read of 22 Nov 2026, findings dispositioned in [audit/LEDGER.md](audit/LEDGER.md) |
 | R1 stewardship | open: no tag, archive or DOI |

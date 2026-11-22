@@ -18,6 +18,7 @@ changed between versions; each report states the version it examined.
 | 2026-11-22 | primary-source citation check, 20 references | 16 YES, 1 PARTIAL, 3 NOT ACCESSED | Dixon statement (missing hypothesis); Garcia title (documentation); Gorenstein locator replaced by an inline proof; Kelly–Johnsen kept as historical credit with the direct proof; Mansilla settled by the next row. [Report](reviews/CITATIONS-v9.md) |
 | 2026-11-22 | Mansilla (2004), full text | none doubly regular | Proposition 44 restored; the earlier caveat removed (documentation). [Report](reviews/MANSILLA-v9.md) |
 | 2026-11-22 | census of this repository (`make verify`) | MATCH | — |
+| 2026-11-22 | release audits: claims consistency; full cold read in two halves; census re-implemented from the theorem statements | CONSISTENT AFTER FIXES; VERIFIED; VERIFIED; census 0 disagreements in 25000 | v > 1 made explicit (documentation); Reid–Brown sketch adds the identity (documentation); Mansilla's orders are odd (documentation); methods paragraph reworded (documentation); chief-step ratio fact stated (documentation); README linear-bound hypotheses and Theorem D inputs (missing hypothesis, documentation); Proposition 44 added to the paper's novelty sentence (documentation). [Report](reviews/RELEASE-AUDITS-2026-11-22.md) |
 
 Which system found which result is recorded in
 [ATTRIBUTION.md](ATTRIBUTION.md).

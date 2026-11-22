@@ -25,7 +25,7 @@ check; logged as not performed, not as "no hits") and MathSciNet
 | Ito, Europ. J. Combin. 5 (1984) 37–42 | $v=pt^2$; prime power when a regular or supersolvable transitive subgroup exists; $v\ne9p$ for $p>3$ | the starting point; Theorem C contains the $9p$ case; the trace lemma is close to Ito's Lemma 5 |
 | Kelly, PAMS 5 (1954); Johnsen, J. Algebra 4 (1966) | prime order with a cyclic transitive group gives Paley (as quoted by Ito, p. 37; original theorem pages not openly accessible) | Corollary 2 combines Theorem B with this conclusion; the paper gives a direct proof |
 | Marušič, Ann. Discrete Math. 27 (1985) | vertex-transitive digraphs of order $p^k$, $k\le3$, are Cayley (checked against the original abstract) | used in Corollary 1 |
-| Mansilla, Discrete Math. 288 (2004) | non-Cayley vertex-transitive tournaments of order $p^k$, $k\ge4$, and lexicographic products with Paley tournaments (full text read) | none is doubly regular (Proposition 44) |
+| Mansilla, Discrete Math. 288 (2004) | non-Cayley vertex-transitive tournaments of odd prime-power order $p^k$, $k\ge4$, and lexicographic products with Paley tournaments (full text read) | none is doubly regular (Proposition 44) |
 | Javier, Llano and Zuazua, Contrib. Discrete Math. 21 (2026) | state, citing Mansilla, that non-Cayley vertex-transitive doubly regular tournaments exist | not supported by Mansilla's constructions |
 | Feng, JCTA 118 (2011); Muzychuk, arXiv:1012.2089 | non-Paley skew Hadamard difference sets of order $p^3$ | Remark 45: Corollary 2 does not extend to $p^3$ |
 | Araujo Garcia, Australas. J. Combin. 95 (2026) | a nilpotent group with a skew Hadamard difference set is a $p$-group; Conjecture 2.9 | Conjecture 2.9 is equivalent to Ito's Theorem 2 |

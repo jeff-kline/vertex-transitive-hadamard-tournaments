@@ -1,4 +1,4 @@
-# Ito counterexamples need large fourth powers
+# Vertex-transitive Hadamard tournaments: Ito counterexamples need large fourth powers
 
 Jeffery Kline
 
@@ -64,8 +64,11 @@ order $p$, $p^2$ or $p^3$ are Cayley digraphs. New here:
    20181 orders to a theorem that excludes it.
 5. **Tools of independent use**: an affine-plane obstruction (Proposition 19),
    a bound for abelian groups of automorphisms in terms of their orbits
-   (Theorem 12), and a linear bound $p<2k-1$ when the Fitting subgroup is a
-   $p$-group (Theorems 35 and 37), which uses the theorem of Hall and Higman.
+   (Theorem 12), and a linear bound (Theorems 35 and 37): if $v$ is not a
+   power of $p$ and the Fitting subgroup of a transitive group $G$ is a
+   $p$-group, then $p<2k-1$, where $p^k$ is the size of an orbit of the
+   largest normal $p$-subgroup of $G$. Its proof uses the theorem of Hall and
+   Higman.
 6. **Mansilla's non-Cayley tournaments are not doubly regular**
    (Proposition 44 and the discussion after it). So no non-Cayley
    vertex-transitive Hadamard tournament is known; whether one exists is left
@@ -91,8 +94,8 @@ MathSciNet were not searched. This is not a claim of global priority.
   Theorems 1–4 and the question this paper addresses.
 - **Marušič (1985)**: vertex-transitive digraphs of order $p^k$, $k\le3$, are
   Cayley.
-- **Mansilla (2004)**: non-Cayley vertex-transitive tournaments of every order
-  $p^k$, $k\ge4$, and products of them with Paley tournaments.
+- **Mansilla (2004)**: non-Cayley vertex-transitive tournaments of every odd
+  prime-power order $p^k$, $k\ge4$, and products of them with Paley tournaments.
 - **Feng (2011)** and **Muzychuk (2010)**: non-Paley skew Hadamard difference
   sets of order $p^3$.
 - **Araujo Garcia (2026)**: a nilpotent group with a skew Hadamard difference
@@ -106,7 +109,7 @@ MathSciNet were not searched. This is not a claim of global priority.
 | Claim | Status |
 |---|---|
 | Theorems A–C, Corollaries 1–2 | proved on paper; conditional on the quoted theorems of Feit–Thompson, Hall–Higman, Aschbacher–Smith, Dixon and Marušič; audited by process-separated AI reviews, not human peer review |
-| Theorem D | proved on paper from Theorems B and C and three exclusions in the Appendix; the assignment of orders to theorems is an exact computation by [code/census.py](code/census.py) |
+| Theorem D | proved on paper from Ito's Theorem 1, Theorems B and C, and three exclusions in the Appendix, with existence at prime powers from the Paley tournaments; the assignment of orders to theorems is an exact computation by [code/census.py](code/census.py), re-implemented independently from the theorem statements with the same result |
 | Proposition 44 (Mansilla) | proved on paper; matched against the full text of Mansilla's article |
 | Order 27 (Remark 45) | computation on McKay's catalogue files, described in [audit/reviews/CITATIONS-v9.md](audit/reviews/CITATIONS-v9.md); not part of this repository's code |
 | Priority | bounded search; see [audit/PRIOR-ART.md](audit/PRIOR-ART.md) |

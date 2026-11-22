@@ -37,13 +37,13 @@ factors $v$ and assigns it to the first rule whose hypotheses $v$ meets:
 
 No order is left open. The census checks hypotheses in exact integer
 arithmetic; it does not search for tournaments, and the exclusions rest on
-the proofs in the paper. The rule set was re-implemented independently for
-the seventh draft (see [audit/LEDGER.md](audit/LEDGER.md)); the ninth-draft
-rules shown here were rerun, not re-implemented.
+the proofs in the paper. A separate implementation written from the theorem
+statements alone, without reading this script, assigned all 25000 orders to
+the same rows (see [audit/LEDGER.md](audit/LEDGER.md)).
 
 ## Paper
 
 `make paper` builds [paper/main.pdf](paper/main.pdf) in three passes with
 `SOURCE_DATE_EPOCH` fixed. Two builds give identical bytes.
 
-PDF SHA-256: `c177846af27193ac998e32f64587eae3eeb23f60a9746878d3f85ac6b85c25e4`
+PDF SHA-256: `19e6fcae248d6893734308f786c1f4c417aa6e96b3c78cdb7534143513d34240`
