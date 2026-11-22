@@ -46,4 +46,8 @@ the same rows (see [audit/LEDGER.md](audit/LEDGER.md)).
 `make paper` builds [paper/main.pdf](paper/main.pdf) in three passes with
 `SOURCE_DATE_EPOCH` fixed. Two builds give identical bytes.
 
-PDF SHA-256: `19e6fcae248d6893734308f786c1f4c417aa6e96b3c78cdb7534143513d34240`
+PDF SHA-256: `16d0389e0a750c48ce620f00cf5a303836f1cc4b38eb6a01931a51911a9d4d0b`
+
+The PDF in the tagged `v0.1.0` archive has SHA-256
+`19e6fcae248d6893734308f786c1f4c417aa6e96b3c78cdb7534143513d34240`; the living
+copy differs only in its title-page line, which now carries the version DOI.

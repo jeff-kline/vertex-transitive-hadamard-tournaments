@@ -9,6 +9,15 @@ authors:
 repository-code: "https://github.com/jeff-kline/vertex-transitive-hadamard-tournaments"
 url: "https://github.com/jeff-kline/vertex-transitive-hadamard-tournaments"
 license: GPL-3.0-only
+doi: 10.5281/zenodo.24448853
+date-released: 2026-11-22
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.24448853
+    description: "Version DOI for release 0.1.0"
+  - type: doi
+    value: 10.5281/zenodo.24448852
+    description: "Concept DOI (all versions)"
 abstract: >-
   A tournament is doubly regular, or a Hadamard tournament, if every vertex
   has the same out-degree and every two vertices have the same number of
