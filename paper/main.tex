@@ -1,0 +1,1022 @@
+\documentclass[11pt]{amsart}
+\usepackage[margin=1in]{geometry}
+\usepackage{amssymb,amsmath,booktabs,verbatim}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{mainthm}{Theorem}
+\renewcommand{\themainthm}{\Alph{mainthm}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\theoremstyle{definition}
+\newtheorem{question}[theorem]{Question}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\cO}{\mathcal{O}}
+\newcommand{\one}{\mathbf{1}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\GaL}{\Gamma\mathrm{L}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\Kb}{\overline{\F}_p}
+\newcommand{\TODO}[1]{\par\smallskip\noindent\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule}{\small\textbf{Draft:} #1}}\par\smallskip}
+
+\title{Ito counterexamples need large fourth powers}
+\hypersetup{pdftitle={Ito counterexamples need large fourth powers},pdfauthor={Jeffery Kline}}
+\author{Jeffery Kline}
+\date{November 22, 2026\\[3pt]\small Draft}
+
+\begin{document}
+
+\begin{abstract}
+A tournament is doubly regular, or a Hadamard tournament, if every vertex has the same out-degree and every two vertices have the same number of common out-neighbours; one on $v$ vertices exists if and only if a skew Hadamard matrix of order $v+1$ exists. In 1984 Ito proved that if the automorphism group is transitive on the vertices, then $v=pt^2$ for a prime $p\equiv3\pmod4$, and he raised the possibility that $v$ is always a power of $p$. This is Ito's question. An Ito counterexample is a vertex-transitive Hadamard tournament whose order is not a prime power; none is known. We prove that any infinite family of Ito counterexamples needs large fourth powers: the largest fourth-power divisor of the order is unbounded along the family. Equivalently, for every bound $B$, only finitely many orders $v$ of Ito counterexamples have largest fourth-power divisor at most $B$. For $B=1$ the answer is exact: if no fourth power of a prime divides $v>1$, a vertex-transitive Hadamard tournament of order $v$ exists only when $v=p$ or $v=p^3$; it is then a Cayley tournament of a $p$-group, and for cube-free $v$ it is the Paley tournament. If $v=p^{2a+1}s^2$ with $s>1$ squarefree and prime to $p$, then $a\ge4$ and $p\le4a-5$. Finally, for $3\le v<10^5$ a vertex-transitive Hadamard tournament of order $v$ exists if and only if $v$ is a prime power congruent to $3$ modulo $4$.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+A \emph{tournament} on a finite vertex set is a choice, for every two distinct vertices $x$ and $y$, of exactly one of the arcs $x\to y$ or $y\to x$; we say that $x$ beats $y$ when $x\to y$. Its \emph{order} is the number $v$ of vertices. It is \emph{doubly regular}, or a \emph{Hadamard tournament}, if every vertex beats the same number of vertices and every two distinct vertices beat the same number of common vertices; then $v\equiv3\pmod4$. It is \emph{vertex-transitive} if its automorphism group is transitive on the vertices. Ito~\cite{Ito84} proved that the order of a vertex-transitive Hadamard tournament is $pt^2$ for a prime $p\equiv3\pmod4$, and raised the possibility that it is always a power of $p$. We call this \emph{Ito's question}, and we call a vertex-transitive Hadamard tournament whose order is not a prime power an \emph{Ito counterexample}; none is known. The \emph{largest fourth-power divisor} of $v$ is the largest integer $d^4$ dividing $v$.
+
+\subsection*{Background and Ito's results}
+A doubly regular tournament has $k=(v-1)/2$ and $\lambda=(v-3)/4$ for the two constants of the definition. One of order $v$ exists if and only if a skew Hadamard matrix of order $v+1$ exists~\cite{RB72}: border the signed matrix of the tournament (Section~\ref{sec:prelim}) by a row and a column, and conversely normalise a skew Hadamard matrix at one index and delete that index. Existence for every $v\equiv3\pmod4$ is therefore the skew Hadamard conjecture.
+
+An \emph{automorphism} of a tournament is a permutation of its vertices that preserves every arc. Let $R$ be a group of odd order $v$. A subset $D\subset R$ is a \emph{skew Hadamard difference set} if $R$ is the disjoint union of $\{1\}$, $D$ and $D^{-1}$, and every non-identity element of $R$ has the same number of representations $d_1d_2^{-1}$ with $d_1,d_2\in D$. Its \emph{Cayley tournament} has vertex set $R$ and arcs $x\to y$ when $x^{-1}y\in D$. It is a Hadamard tournament, and left translations by $R$ are automorphisms, so it is vertex-transitive. Conversely, a tournament whose automorphism group contains a subgroup $R$ acting regularly on the vertices is the Cayley tournament of the set of out-neighbours of the identity, after the vertices are identified with $R$. The \emph{Paley tournament} on a finite field $\F_q$, $q\equiv3\pmod4$, is the Cayley tournament of the set of nonzero squares in the additive group of $\F_q$.
+
+Ito~\cite{Ito84} studied vertex-transitive Hadamard tournaments, which he called THT. He wrote that the quadratic residue designs, which correspond to the Paley tournaments, are the ``classic and seemingly only examples'' \cite[p.~37]{Ito84}. He proved that the order is $pt^2$ for a prime $p\equiv3\pmod4$, that it is a prime power whenever the automorphism group contains a regular subgroup or a supersolvable transitive subgroup, and that it is not $9p$ for primes $p>3$. After these results he wrote that ``there seems to exist a further possibility to show that $4\lambda+3$ is a power of the distinguished prime. However, we are only able to prove this in a very special case'' \cite[p.~41]{Ito84}.
+
+Ito's THT is a Hadamard $2$-$(4\lambda+3,2\lambda+1,\lambda)$ design with a bijection $T$ from blocks to points that satisfies two conditions, and with a transitive group of automorphisms commuting with $T$ \cite[p.~37]{Ito84}. The two conditions say that the blocks are the out-neighbourhoods of a tournament and that $T$ sends each block to its vertex. So the THTs are the vertex-transitive Hadamard tournaments, with the same automorphism groups and $4\lambda+3=v$. Ito's four theorems read as follows.
+
+\begin{quote}
+\textsc{Theorem 1} \cite[p.~39]{Ito84}. ``There exists a prime $p$ such that $4\lambda+3=ps^2$ and $p\equiv3\pmod 4$, where $s$ is a positive rational integer.''
+
+\textsc{Theorem 2} \cite[p.~40]{Ito84}. ``If the automorphism group of a THT contains a regular transitive subgroup, then $4\lambda+3$ is a power of a prime.''
+
+\textsc{Theorem 3} \cite[p.~41]{Ito84}. ``Let $G$ be a minimal transitive automorphism group of a THT and $p$ the distinguished prime of $G$. Moreover, let $a$ be a point and $G_a$ the stabilizer of $a$ in $G$. If $4\lambda+3$ is not a power of $p$, then there exists a chief factor $K/L$ of $G$ such that (a) $K/L$ is a $q$-group with $q\ne p$ and (b) the index of $LG_a$ in $KG_a$ equals $q^{2u}$, where $u$ is a positive integer. In particular, if $G$ is supersolvable, then $4\lambda+3$ is a power of $p$.''
+
+\textsc{Theorem 4} \cite[p.~41]{Ito84}. ``Let $(D,T)$ be a THT with a minimal transitive automorphism group $G$. Let $p$ be the distinguished prime of $G$. If $p$ is bigger than three, then $4\lambda+3\ne9p$.''
+\end{quote}
+
+\subsection*{Results}
+\begin{mainthm}\label{thm:A}
+For every $B\ge1$, only finitely many integers $v$ have the following three properties: $v$ is not a prime power, the largest fourth-power divisor of $v$ is at most $B$, and a vertex-transitive Hadamard tournament of order $v$ exists.
+\end{mainthm}
+
+\begin{mainthm}\label{thm:fourthfree}
+Let $v>1$ be an integer that no fourth power of a prime divides. A vertex-transitive Hadamard tournament of order $v$ exists if and only if $v=p$ or $v=p^3$ for a prime $p\equiv3\pmod4$.
+\end{mainthm}
+
+\begin{corollary}\label{cor:cayley}
+Every vertex-transitive Hadamard tournament of fourth-power-free order $v>1$ is a Cayley tournament of a $p$-group of order $p$ or $p^3$. Equivalently, it comes from a skew Hadamard difference set in such a group.
+\end{corollary}
+
+\begin{corollary}\label{cor:cubefree}
+A vertex-transitive Hadamard tournament of cube-free order $v>1$ has prime order, and it is isomorphic to the Paley tournament on $\F_v$.
+\end{corollary}
+
+\begin{mainthm}\label{thm:C}
+Suppose a Hadamard tournament of order $v=p^{2a+1}s^2$ is vertex-transitive, where $p\equiv3\pmod4$ is prime, $a\ge0$, and $s>1$ is odd, squarefree and prime to $p$. Then:
+\begin{enumerate}
+\item $a\ge4$; that is, there is no such tournament of order $ps^2$, $p^3s^2$, $p^5s^2$ or $p^7s^2$. If $a=4$, then $p=3$.
+\item $p\le4a-5$.
+\end{enumerate}
+\end{mainthm}
+
+\begin{mainthm}\label{thm:main}
+Let $3\le v<10^5$. A vertex-transitive Hadamard tournament of order $v$ exists if and only if $v$ is a prime power congruent to $3$ modulo $4$.
+\end{mainthm}
+
+Theorem~\ref{thm:fourthfree} is the case $B=1$ of Theorem~\ref{thm:A}, where the finite set is empty. Corollary~\ref{cor:cayley} combines Theorem~\ref{thm:fourthfree} with a theorem of Maru\v{s}i\v{c}~\cite{Marusic}, and Corollary~\ref{cor:cubefree} combines it with the theorem of Kelly~\cite{Kelly} and Johnsen~\cite{Johnsen} on cyclic difference sets of prime order, for which we include a short proof. No vertex-transitive Hadamard tournament of non-prime-power order is known. Theorems~\ref{thm:A} and~\ref{thm:C}, and every exclusion result in this paper that concerns a prime other than $p$, are therefore necessary conditions on an object that may not exist; if Ito's question has a positive answer, they are vacuous. Theorem~\ref{thm:main} is an application: Section~\ref{sec:census} assigns every order $v\equiv3\pmod4$ below $10^5$ that is not a prime power to a theorem that excludes it, and the three exclusions used only there are proved in the Appendix.
+
+\subsection*{What is new}
+To our knowledge Theorems~\ref{thm:A}--\ref{thm:main} and Corollaries~\ref{cor:cayley} and~\ref{cor:cubefree} are new. Ito proved the case $v=9p$ of Theorem~\ref{thm:C}. The main tools are these.
+\begin{itemize}
+\item \emph{Affine-plane obstruction} (Proposition~\ref{prop:plane}). If a prime $r\ne p$ divides $v$ exactly twice, a transitive group of automorphisms has no nontrivial normal $r$-subgroup. So when $s$ is squarefree the Fitting subgroup is a $p$-group.
+\item \emph{Chief-step bound} (Proposition~\ref{prop:chiefbound}). A chief factor of characteristic $r\ne p$ that merges orbits leaves at least $r^2+r+1$ orbits.
+\item \emph{Abelian orbit bound} (Theorem~\ref{thm:abelian}). Every abelian group $A\ne1$ of automorphisms of a Hadamard tournament satisfies $\log|A|<2\,\mathbb{E}_x\log|Ax|$, the mean being over the vertices $x$.
+\item \emph{Linear bound} (Theorems~\ref{thm:linear} and~\ref{thm:endpoint}). If the Fitting subgroup of a transitive group $G$ is a $p$-group and $v$ is not a power of $p$, then $p<2k-1$, where $p^k$ is the size of an orbit of $O_p(G)$. The proof uses the theorem of Hall and Higman.
+\end{itemize}
+
+\emph{Related work.} Ito~\cite{Ito84} proved the four theorems recalled in Section~\ref{sec:trace}; our trace lemma (Lemma~\ref{lem:trace}) is close to his Lemma~5. Earlier, Kelly~\cite{Kelly} and Johnsen~\cite{Johnsen} showed that a Hadamard tournament of prime order with a cyclic transitive group is Paley (see \cite[p.~37]{Ito84}); Corollary~\ref{cor:cubefree} reaches the same conclusion for every vertex-transitive Hadamard tournament of cube-free order. Ito also notes \cite[p.~37]{Ito84} that the tournaments with a rank~$3$ automorphism group studied by Lam~\cite{Lam} are Paley, and Berggren~\cite[Theorem~A]{Berggren} characterized the finite arc-transitive tournaments; both settings assume more symmetry than vertex-transitivity. Ito's later paper~\cite{Ito90} and Pasechnik~\cite{Pasechnik} study tournament matrices and the association schemes of Hadamard tournaments, without transitive groups. Garcia~\cite[Conjecture~2.9]{Garcia} asks whether every group with a skew Hadamard difference set is a $p$-group; by the correspondence recalled above between such difference sets and regular groups of automorphisms, this is Ito's Theorem~2. Our results assume only a transitive group. Maru\v{s}i\v{c}~\cite{Marusic} proved that vertex-transitive digraphs of order $p^k$, $k\le3$, are Cayley, and non-Paley examples exist at order $p^3$ (Feng~\cite{Feng}, Muzychuk~\cite{Muzychuk}; Remark~\ref{rem:p3}). Mansilla~\cite{Mansilla} constructed non-Cayley vertex-transitive tournaments of every prime-power order $p^k$, $k\ge4$; none of them is doubly regular (Section~\ref{sec:conj}).
+
+\section{Preliminaries}\label{sec:prelim}
+
+Throughout, $T$ is a Hadamard tournament on a vertex set $X$ of size $v$, with $k=(v-1)/2$ and $\lambda=(v-3)/4$, and $\Aut(T)$ is its automorphism group. Groups act on the left. For a prime $q$, $\nu_q(n)$ is the exponent of $q$ in $n$, and $q^e\parallel n$ means $\nu_q(n)=e$.
+
+\subsection{The signed matrix}
+The \emph{signed matrix} $S$ of $T$ has rows and columns indexed by $X$, with $S[x,y]=1$ if $x\to y$, $S[x,y]=-1$ if $y\to x$, and $S[x,x]=0$. Write $I$ for the identity matrix, $J$ for the all-ones matrix and $\one$ for the all-ones vector.
+
+\begin{lemma}\label{lem:S}
+$S^{T}=-S$, $S\one=0$, and $S^2=J-vI$. Conversely, a real $b\times b$ matrix $S'$ with $S'^{T}=-S'$, zero diagonal, off-diagonal entries $\pm1$, and $S'S'^{T}=bI-J$ is the signed matrix of a Hadamard tournament of order $b$.
+\end{lemma}
+\begin{proof}
+The first identity is the definition of a tournament. Each row of $S$ has $k$ entries $1$ and $v-1-k=k$ entries $-1$, so $S\one=0$. Let $x\ne y$. Among the $v-2$ other vertices, $\lambda$ are beaten by both $x$ and $y$; $k-\lambda$ are beaten by $x$ and not by $y$, one of which may be $y$ itself; and likewise for $y$. So the number of $z\ne x,y$ beaten by exactly one of $x,y$ is $2(k-\lambda)-1$, and the number of $z$ with $S[x,z]=S[y,z]$ is $(v-2)-2(k-\lambda)+1$. Hence $(SS^{T})[x,y]=(v-2)-4(k-\lambda)+2=-1$, using $4k=2v-2$ and $4\lambda=v-3$. Also $(SS^{T})[x,x]=v-1$. So $SS^{T}=vI-J$ and $S^2=-SS^{T}$.
+
+For the converse, $S'$ is the signed matrix of a tournament. Since $\one^{T}S'S'^{T}\one=b^2-b^2=0$, we have $S'^{T}\one=0$, so $S'\one=0$ and every vertex beats $(b-1)/2$ vertices. Let $x\to y$. Among the vertices $w\ne x,y$ let $n_1$ be beaten by both, $n_2$ beat both, $n_3$ be beaten by $x$ only and $n_4$ by $y$ only. Then $n_1+n_3+1=n_1+n_4=(b-1)/2$ by counting the vertices beaten by $x$ and by $y$, and $n_2+n_3+1=(b-1)/2$ by counting the vertices that beat $y$. So $n_1=n_2$. The entry $(S'S'^{T})[x,y]=-1$ is $n_1+n_2-n_3-n_4$, and $n_1+n_2+n_3+n_4=b-2$. So $n_1=(b-3)/4$.
+\end{proof}
+
+A permutation $g$ of $X$ with permutation matrix $P_g$ is an automorphism of $T$ if and only if $P_gS=SP_g$, that is, $S[gx,gy]=S[x,y]$ for all $x,y$.
+
+\subsection{Groups}
+\begin{lemma}\label{lem:odd}
+$\Aut(T)$ has odd order. Every subgroup of $\Aut(T)$ is solvable.
+\end{lemma}
+\begin{proof}
+An automorphism of order two exchanges two vertices $x,y$ and so maps the arc between them to its reverse. So $|\Aut(T)|$ is odd, and groups of odd order are solvable by the Feit--Thompson theorem~\cite{FT63}.
+\end{proof}
+
+From here on $G\le\Aut(T)$ is a subgroup transitive on $X$. It acts faithfully on $X$. We use the following standard facts about a finite solvable group $G\neq1$; see~\cite{Gorenstein}.
+\begin{itemize}
+\item A minimal normal subgroup, and more generally every chief factor $K/L$, is an elementary abelian $q$-group for some prime $q$, which we call its \emph{characteristic}.
+\item For every prime $p$ there is a \emph{Hall $p'$-subgroup}: a subgroup whose order is the largest divisor of $|G|$ prime to $p$ (P.~Hall).
+\item Let $O_\ell(G)$ be the largest normal $\ell$-subgroup. The \emph{Fitting subgroup} $F(G)=\prod_\ell O_\ell(G)$ is nontrivial and contains its centralizer: $C_G(F(G))\le F(G)$.
+\end{itemize}
+For a $p$-group $P$, $\Phi(P)$ is the Frattini subgroup, so that $P/\Phi(P)$ is the largest elementary abelian quotient, and $\Omega_1(Z(P))$ is the subgroup of elements of order dividing $p$ in the centre. Both are characteristic in $P$.
+
+A \emph{block system} of $G$ is a $G$-invariant partition of $X$. Its blocks have equal size and $G$ permutes them transitively. If $N$ is a normal subgroup of $G$, the $N$-orbits form a block system. We write $b_N$ for the number of $N$-orbits and $h_N=v/b_N$ for their size. If $N$ is a nontrivial $\ell$-group then $h_N$ is a power of $\ell$, and $h_N>1$ because the action is faithful. In particular $\ell$ divides $v$.
+
+A \emph{minimal transitive} subgroup is a transitive subgroup of $\Aut(T)$ all of whose proper subgroups are intransitive. Every transitive group contains one.
+
+\begin{lemma}\label{lem:regular-abelian}
+Let $U$ be an abelian group acting transitively on a set $\Delta$. Then all points of $\Delta$ have the same stabilizer in $U$, and the image of $U$ in $\Sym(\Delta)$ is its own centralizer in $\Sym(\Delta)$.
+\end{lemma}
+\begin{proof}
+The stabilizer of $ux$ is $uU_xu^{-1}=U_x$. So the image $\bar U$ of $U$ acts regularly. A permutation commuting with $\bar U$ is determined by the image of one point, so the centralizer has at most $|\Delta|=|\bar U|$ elements, and it contains $\bar U$.
+\end{proof}
+
+\begin{lemma}\label{lem:cover}
+If a finite group $A$ is the union of $n$ subgroups of index $m>1$, then $n>m$.
+\end{lemma}
+\begin{proof}
+Each subgroup has $|A|/m$ elements and all contain the identity, so the union has at most $n(|A|/m-1)+1$ elements. If $n\le m$ this is at most $|A|-m+1<|A|$.
+\end{proof}
+
+Let $U$ be an abelian normal subgroup of $G$. By Lemma~\ref{lem:regular-abelian} the stabilizer in $U$ of a point is the same for all points of a $U$-orbit; we call it the \emph{stabilizer of the orbit}. Since $G$ permutes the $U$-orbits transitively and conjugates their stabilizers, each subgroup that occurs as a stabilizer occurs on the same number of orbits. The intersection of all stabilizers is trivial, because $G$ is faithful on $X$. For an elementary abelian $\ell$-group $U$ let $U^*=\operatorname{Hom}(U,\F_\ell)$, and for $K\le U$ let $K^\perp=\{\mu\in U^*:\mu(K)=0\}$, a subspace of dimension $\dim U-\dim K$; then $(KK')^\perp=K^\perp\cap K'^\perp$.
+
+\subsection{Orbit matrices}
+Let $N\le\Aut(T)$ be a subgroup all of whose orbits have the same size $h$; this holds when $N$ is normal in a transitive group. Let $b=v/h$ be the number of orbits. The \emph{orbit matrix} $Q=Q_N$ is the $b\times b$ matrix with
+\[
+Q[O,O']=\sum_{y\in O'}S[x,y]\qquad(x\in O).
+\]
+The sum does not depend on the choice of $x\in O$, because $N$ preserves $S$ and permutes $O'$.
+
+\begin{lemma}[Orbit matrix]\label{lem:Q}
+$Q$ is an integer matrix with $Q^{T}=-Q$ and $QQ^{T}=vI-hJ$. Its off-diagonal entries are odd. In particular every row of $Q$ has squared norm $v-h=h(b-1)$.
+\end{lemma}
+\begin{proof}
+Let $E$ be the $v\times b$ matrix whose columns are the indicator vectors of the orbits. Then $SE=EQ$ and $E^{T}E=hI$. So $hQ=E^{T}SE$, which is skew. By Lemma~\ref{lem:S}, $EQ^2=S^2E=(J-vI)E=E(hJ-vI)$, and $E$ has independent columns, so $Q^2=hJ-vI$ and $QQ^{T}=-Q^2$. An off-diagonal entry is a sum of $h$ signs, and $h$ is odd because it divides $v$.
+\end{proof}
+
+\begin{lemma}[Orbit-discriminant law]\label{lem:disc}
+The number $b\,v^{(b-1)/2}$ is a rational square. In particular $\nu_q(b)$ is even for every prime $q$ with $\nu_q(v)$ even.
+\end{lemma}
+\begin{proof}
+Let $U_0=\{y\in\Q^b:\sum_iy_i=0\}$ with the standard inner product $\langle\,,\rangle$. In the basis $e_i-e_b$ ($i<b$) its Gram matrix is $I+J$ of size $b-1$, with determinant $b$. So the discriminant of $U_0$ is $b$ modulo rational squares. By Lemma~\ref{lem:Q}, $Q$ is skew, $Q\one=0$, so $Q$ maps $U_0$ to itself, and $Q^2=-v$ on $U_0$. For $0\ne y\in U_0$ we have $\langle y,Qy\rangle=0$ and $\langle Qy,Qy\rangle=-\langle y,Q^2y\rangle=v\langle y,y\rangle$. So the plane spanned by $y$ and $Qy$ is $Q$-invariant with Gram determinant $v\langle y,y\rangle^2$, and its orthogonal complement in $U_0$ is $Q$-invariant because $Q$ is skew. By induction $U_0$ is an orthogonal sum of $(b-1)/2$ such planes, and its discriminant is $v^{(b-1)/2}$ modulo squares. Comparing the two values gives the first claim. The second follows by taking $q$-adic valuations.
+\end{proof}
+
+\begin{lemma}[Orbit sums]\label{lem:rowsum}
+Let $U\le\Aut(T)$ be abelian with all orbits of the same size $h$. Let $O\ne O'$ be $U$-orbits with point stabilizers $K$ and $K'$ in $U$, and let $x\in O$. Then $y\mapsto S[x,y]$ is constant on each $K$-orbit in $O'$. These orbits have length $[KK':K']$, and $Q_U[O,O']$ is an odd multiple of $[KK':K']$. In particular $|Q_U[O,O']|\ge[KK':K']$, and $Q_U[O,O']=\pm h$ if $KK'=U$.
+\end{lemma}
+\begin{proof}
+For $k\in K$ we have $S[x,ky]=S[kx,ky]=S[x,y]$. By Lemma~\ref{lem:regular-abelian} every point of $O'$ has stabilizer $K'$, so each $K$-orbit in $O'$ has length $[K:K\cap K']=[KK':K']$. So $Q_U[O,O']$ is a sum of $h/[KK':K']$ terms $\pm[KK':K']$, and the number of terms is odd because $h$ is odd.
+\end{proof}
+
+\section{The trace lemma and Ito's theorems}\label{sec:trace}
+
+Write $v=v_0n^2$ with $v_0$ squarefree. Since $v\equiv3\pmod4$ and $n$ is odd, $v_0\equiv3\pmod4$; in particular $v_0>1$. For an integer $o\ge1$ let $\zeta_o$ be a primitive $o$-th root of unity.
+
+\begin{lemma}[Trace lemma]\label{lem:trace}
+Let $g\in\Aut(T)$ have order $o$, and put $t_g=\tr(SP_g)$. Then:
+\begin{enumerate}
+\item $t_g\in\sqrt{-v}\,\Z[\zeta_o]$;
+\item $t_g$ is an integer congruent modulo $2$ to the number of vertices moved by $g$;
+\item if $t_g\ne0$, then $v_0$ divides $o$.
+\end{enumerate}
+Consequently, an automorphism without fixed vertices has order divisible by $v_0$.
+\end{lemma}
+\begin{proof}
+(1) The real skew matrix $S$ is diagonalisable over $\C$. By Lemma~\ref{lem:S} it is zero on $\C\one$, and on the orthogonal complement of $\one$ it satisfies $S^2=-v$, so its eigenvalues there are $\pm\sqrt{-v}$. Let $E_+$ and $E_-$ be the two eigenspaces. Since $P_g$ commutes with $S$, it preserves $E_+$ and $E_-$, and
+\[
+t_g=\sqrt{-v}\,\bigl(\tr(P_g|_{E_+})-\tr(P_g|_{E_-})\bigr).
+\]
+Each of the two traces is a sum of $o$-th roots of unity.
+
+(2) Up to the convention for $P_g$, $t_g=\sum_xS[x,gx]$ or $\sum_xS[gx,x]$. A fixed vertex contributes $0$ and a moved vertex contributes $\pm1$.
+
+(3) If $t_g\ne0$, then by (1) and (2) $\sqrt{-v}$, and hence $\sqrt{-v_0}$, lies in $\Q(\zeta_o)$. Since $-v_0\equiv1\pmod4$, the field $\Q(\sqrt{-v_0})$ has discriminant $-v_0$, and every prime dividing $v_0$ ramifies in it. Such a prime then ramifies in $\Q(\zeta_o)$ and so divides $o$. As $v_0$ is squarefree, $v_0\mid o$.
+
+If $g$ has no fixed vertex, $t_g\equiv v\equiv1\pmod2$ by (2), so $t_g\ne0$.
+\end{proof}
+
+\begin{proposition}\label{prop:laws}
+Let $G\le\Aut(T)$ be transitive.
+\begin{enumerate}
+\item\emph{(Ito's Theorem 1.)} $v_0$ is a prime $p\equiv3\pmod4$. So $v=pt^2$.
+\item\emph{(Fixed-point law.)} Every automorphism of $T$ of order prime to $p$ fixes a vertex.
+\item\emph{(Quotient law.)} Every block system of $G$ with $b>1$ blocks has $p\mid b$.
+\item\emph{(Ito's Theorem 2.)} If $G$ contains a subgroup acting regularly on $X$, then $v$ is a power of $p$.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+Let $q$ be a prime dividing $v_0$. An automorphism of order prime to $q$ has order not divisible by $v_0$, so it fixes a vertex by Lemma~\ref{lem:trace}.
+
+We claim that $q\mid b$ for every block system of a transitive group $G_1\le\Aut(T)$ with $b>1$ blocks. Suppose $q\nmid b$. Let $H$ be a Hall $q'$-subgroup of $G_1$ and $B$ the stabilizer in $G_1$ of a block. Since $[G_1:B]=b$ is prime to $q$, the largest divisors of $|G_1|$ and $|B|$ prime to $q$ have ratio $b$. The order of $H\cap B$ divides $|B|$ and is prime to $q$, so $[H:H\cap B]\ge b$, and $H$ is transitive on the $b$ blocks. In a transitive permutation group the average number of fixed points is $1$, and the identity fixes $b>1$ blocks. So some $h\in H$ fixes no block, hence no vertex, although its order is prime to $q$. This contradiction proves the claim.
+
+(1) Let $G_1\le G$ be minimal transitive. It is solvable by Lemma~\ref{lem:odd}, so it has a normal subgroup $M$ of prime index $\ell$. By minimality $M$ is intransitive. The group $G_1/M$ of order $\ell$ permutes the $M$-orbits transitively, so there are exactly $\ell$ of them. By the claim every prime dividing $v_0$ divides $\ell$. Since $v_0>1$ is squarefree, $v_0=\ell$.
+
+(2) and (3) are the two statements above with $q=p$.
+
+(4) Every non-identity element of a regular subgroup $R$ has no fixed vertex, so its order is divisible by $p$ by Lemma~\ref{lem:trace}. By Cauchy's theorem $R$ is a $p$-group, and $v=|R|$.
+\end{proof}
+
+We call $p$ the \emph{distinguished prime}, following Ito. From now on $v=pt^2=p^{2a+1}s^2$ with $p\nmid s$; we call $s$ the \emph{cofactor}. We say that $v$ is \emph{mixed} if it is not a power of $p$, that is, if $s>1$.
+
+Parts (1) and (4) are Ito's Theorems~1 and~2, quoted in the introduction. Ito's proofs use the group ring of $G$ and his Lemma~5 on $p$-rational representations \cite[p.~39]{Ito84}; Lemma~\ref{lem:trace} states the same eigenvalue count for a single permutation matrix. His Theorem~3 is recovered, for every transitive group and with an additional inequality, in Lemma~\ref{lem:chief}. His Theorem~4 is a case of Theorem~\ref{thm:fourthfree}.
+
+\section{Abelian groups of automorphisms}\label{sec:abelian}
+
+Theorem~\ref{thm:abelian}, Corollary~\ref{cor:abelianorder} and Lemma~\ref{lem:orderbound} hold for every Hadamard tournament $T$; no transitivity is assumed, and the orbits of the groups may have different sizes. Logarithms are natural.
+
+\begin{theorem}[Abelian orbit bound]\label{thm:abelian}
+Let $A\ne1$ be an abelian group of automorphisms of a Hadamard tournament on a vertex set $X$ of size $v$. Then
+\[
+\log|A|<\frac2v\sum_{x\in X}\log|Ax| .
+\]
+\end{theorem}
+\begin{proof}
+We show by induction on $|A|$ that $\log|A|\le\frac2v\sum_x\log|Ax|$ for every abelian group $A$ of automorphisms, with strict inequality if $A\ne1$. For $A=1$ both sides are zero. Let $A\ne1$.
+
+Let $O_1,\dots,O_b$ be the orbits of $A$ and $n_i=|O_i|$. The $n_i$ are odd, because $|A|$ is odd (Lemma~\ref{lem:odd}). By Lemma~\ref{lem:regular-abelian} all points of $O_i$ have the same stabilizer $K_i$ in $A$, and $n_i=[A:K_i]$. Put $c_{ij}=[A:K_iK_j]$, so that $c_{ii}=n_i$. For $x\in O_i$ let $Q_{ij}=\sum_{y\in O_j}S[x,y]$. This does not depend on the choice of $x\in O_i$, because $A$ preserves $S$ and permutes $O_j$.
+
+\emph{A lower bound for $|Q_{ij}|$.} Let $i\ne j$ and $x\in O_i$. As in Lemma~\ref{lem:rowsum}, the function $y\mapsto S[x,y]$ is constant on the orbits of $K_i$ in $O_j$, and these have length $[K_i:K_i\cap K_j]=[K_iK_j:K_j]=n_j/c_{ij}$. So $Q_{ij}$ is a multiple of $n_j/c_{ij}$. It is a sum of $n_j$ signs, hence odd. Therefore $|Q_{ij}|\ge n_j/c_{ij}$.
+
+\emph{The norm of a row.} Let $e_i$ be the indicator vector of $O_i$. For $y\in O_j$ we have $(Se_i)(y)=\sum_{x\in O_i}S[y,x]=Q_{ji}$, so $\|Se_i\|^2=\sum_jn_jQ_{ji}^2$. By Lemma~\ref{lem:S}, $S^{T}S=vI-J$, so $\|Se_i\|^2=vn_i-n_i^2$. Since $S$ is skew, $n_jQ_{ji}=\sum_{y\in O_j,\,x\in O_i}S[y,x]=-n_iQ_{ij}$. Substituting $Q_{ji}=-n_iQ_{ij}/n_j$ and dividing by $n_i$ gives
+\[
+\sum_{j}\frac{n_i}{n_j}\,Q_{ij}^2=v-n_i .
+\]
+
+\emph{The inequality for one orbit.} Since $A\ne1$ acts faithfully, we can choose $i$ with $n_i>1$. The terms with $j\ne i$ in the last sum are at least $n_in_j/c_{ij}^2$, and for $j=i$ this expression equals $1$. Hence $n_i\sum_jn_jc_{ij}^{-2}\le v-n_i+1<v$, that is,
+\[
+\sum_j\frac{n_j}{v}\,c_{ij}^{-2}<\frac1{n_i} .
+\]
+The weights $n_j/v$ have sum $1$. By the inequality between the weighted arithmetic and geometric means,
+\begin{equation}\label{eq:amgm}
+2\sum_j\frac{n_j}{v}\log c_{ij}>\log n_i .
+\end{equation}
+
+\emph{Induction.} The group $K_i$ is a proper subgroup of $A$. For $x\in O_j$ its orbit has size $|K_ix|=n_j/c_{ij}$. By the induction hypothesis and~\eqref{eq:amgm},
+\[
+\log|K_i|\le\frac2v\sum_jn_j\log\frac{n_j}{c_{ij}}=\frac2v\sum_x\log|Ax|-2\sum_j\frac{n_j}{v}\log c_{ij}<\frac2v\sum_x\log|Ax|-\log n_i .
+\]
+Since $|A|=n_i|K_i|$, the claim follows.
+\end{proof}
+
+\begin{corollary}\label{cor:abelianorder}
+Let $A\ne1$ be an abelian group of automorphisms of a Hadamard tournament. If every orbit of $A$ has at most $h$ elements, then $|A|<h^2$. If moreover $A$ is an $\ell$-group for a prime $\ell$ and $h=\ell^t$, then $|A|\le\ell^{2t-1}$.
+\end{corollary}
+\begin{proof}
+By Theorem~\ref{thm:abelian}, $\log|A|<2\log h$. If $|A|=\ell^m$ and $h=\ell^t$, then $m<2t$.
+\end{proof}
+
+\begin{corollary}[Rank bound]\label{lem:rankbound}
+Let $G$ be a transitive group of automorphisms of a Hadamard tournament, let $\ell$ be a prime, and let $Z\ne1$ be a normal elementary abelian $\ell$-subgroup of $G$ whose orbits have size $\ell^e$. Then $\dim Z\le2e-1$.
+\end{corollary}
+\begin{proof}
+Apply Corollary~\ref{cor:abelianorder} with $t=e$.
+\end{proof}
+
+\begin{lemma}[Order bound]\label{lem:orderbound}
+Let $\ell$ be a prime, and let $N$ be an $\ell$-group of automorphisms of a Hadamard tournament all of whose orbits have at most $\ell^t$ elements. Then $|N|\le\ell^{t(2t-1)}$.
+\end{lemma}
+\begin{proof}
+We may assume $N\ne1$, so $t\ge1$. Let $A$ be a maximal abelian normal subgroup of $N$, of order $\ell^m$. Its orbits lie in orbits of $N$, so $m\le2t-1$ by Corollary~\ref{cor:abelianorder}.
+
+We have $C_N(A)=A$. Otherwise $C_N(A)/A$ is a nontrivial normal subgroup of the $\ell$-group $N/A$, so it contains a subgroup of order $\ell$ that is central in $N/A$. The preimage of that subgroup is generated by $A$ and one element centralizing $A$. It is abelian, normal in $N$, and larger than $A$. So $N/A$ acts faithfully on $A$ by conjugation.
+
+Choose a chain $1=A_0<A_1<\dots<A_m=A$ of subgroups normal in $N$ with $|A_j/A_{j-1}|=\ell$: given $A_{j-1}$, the nontrivial normal subgroup $A/A_{j-1}$ of $N/A_{j-1}$ contains a central subgroup of order $\ell$, and $A_j$ is its preimage. Choose $a_j\in A_j\setminus A_{j-1}$. Then $a_1,\dots,a_m$ generate $A$. Since $A_j/A_{j-1}$ is central in $N/A_{j-1}$, every $g\in N$ maps $a_j$ into the coset $a_jA_{j-1}$, which has $\ell^{j-1}$ elements. The action of $g$ on $A$ is determined by the images of the $a_j$. So $|N/A|\le\ell^{m(m-1)/2}$, and $|N|\le\ell^{m(m+1)/2}\le\ell^{t(2t-1)}$.
+\end{proof}
+
+The rank bound gives the structure of normal subgroups with orbits of size $\ell$ or $r^2$. Here $G\le\Aut(T)$ is transitive.
+
+\begin{corollary}[Prime orbits]\label{lem:prime-orbit}
+Let $\ell$ be a prime. A normal $\ell$-subgroup $U$ of $G$ whose orbits have size $\ell$ is cyclic of order $\ell$.
+\end{corollary}
+\begin{proof}
+On each orbit $U$ induces a transitive $\ell$-subgroup of the symmetric group of degree $\ell$, which has order $\ell$. Since $U$ embeds in the product of these images, $U$ is elementary abelian, and $|U|\le\ell$ by Corollary~\ref{cor:abelianorder} with $t=1$.
+\end{proof}
+
+\begin{proposition}\label{prop:r-structure}
+Let $r\ne p$ be a prime, and let $U$ be a normal elementary abelian $r$-subgroup of $G$ whose orbits have size $r^2$. Then $U\cong C_r^3$, the orbit stabilizers are exactly the $r^2+r+1$ subgroups of order $r$, and $r^2+r+1$ divides $v/r^2$.
+\end{proposition}
+\begin{proof}
+The orbit stabilizers have index $r^2$ in $U$. Every element of $U$ fixes a vertex by the fixed-point law, so the stabilizers cover $U$. A trivial subgroup does not cover $U$, so $\dim U\ge3$; and $\dim U\le3$ by Corollary~\ref{lem:rankbound}. The stabilizers are then subgroups of order $r$ that cover $U$, so every subgroup of order $r$ occurs. Each occurs on the same number $c$ of orbits (Section~\ref{sec:prelim}), so $b_U=v/r^2=c\,(r^2+r+1)$.
+\end{proof}
+
+\section{An affine-plane obstruction}\label{sec:plane}
+
+\begin{lemma}\label{lem:linear}
+Let $r$ be an odd prime and let $H\le\GL(3,r)$ be a solvable group that is transitive on the one-dimensional subspaces of $\F_r^3$. Then $\F_r^3$ can be identified with the field $\F_{r^3}$ so that every element of $H$ has the form $z\mapsto\alpha\,\sigma(z)$ with $\alpha\in\F_{r^3}^\times$ and $\sigma$ a field automorphism; that is, $H\le\GaL(1,r^3)$.
+\end{lemma}
+\begin{proof}
+Write $V=\F_r^3$. Transitivity on points makes $H$ irreducible on $V$ and its image $\bar H$ in the projective group nontrivial. Let $A$ be a minimal normal subgroup of $\bar H$ and $B$ its preimage in $H$. Then $A$ is elementary abelian and $B$ is normal in $H$.
+
+\emph{$B$ abelian.} The Sylow $r$-subgroup of $B$ has a nonzero fixed space, which is $H$-invariant and so equals $V$. So $r\nmid|B|$ and $V$ is a semisimple $B$-module. Its isotypic components are permuted by $H$. If there were more than one, the points lying in components would form a proper nonempty $H$-invariant set of points. So $V$ is isotypic, and the subalgebra $\F_r[B]\subseteq\operatorname{End}(V)$ acts faithfully on a simple module. Being commutative, it is a field, of degree dividing $3$. The degree is not $1$ because $B$ contains a nonscalar element. So $\F_r[B]\cong\F_{r^3}$ and $V$ is one-dimensional over it. Since $H$ normalizes $B$, conjugation by $h\in H$ is a field automorphism of $\F_r[B]$, and $h$ is semilinear.
+
+\emph{$B$ nonabelian.} Commutators in $B$ are scalar because $A$ is abelian, and they have determinant one, so they are cube roots of unity in $\F_r$. A nontrivial one exists, so $r\equiv1\pmod3$ and $r\ge7$. The commutator induces a nonzero alternating pairing on $A$ with values in the cube roots of unity. Its radical is normal in $\bar H$, hence trivial. So $A$ has exponent $3$ and the pairing is nondegenerate. Choose a matrix $M_a\in B$ over each $a\in A$. Conjugation by $B$ multiplies $M_a$ by a character of $B$, and these characters are distinct for distinct $a$ by nondegeneracy. So the $M_a$ are linearly independent in the nine-dimensional matrix algebra, $|A|\le9$, and $|A|=9$ because the pairing is nonzero and alternating. For $a\ne1$ the matrix $M_a$ is conjugate to $\zeta M_a$ for a primitive cube root of unity $\zeta$, so its three eigenvalues are distinct and it fixes at most three points. The $A$-orbits on the $r^2+r+1$ points have a common size dividing $9$. Since $r^2+r+1\equiv3\pmod9$, this size is $1$ or $3$, and every point is fixed by a non-identity element of $A$. But the eight such elements fix at most $24$ points, and $r^2+r+1\ge57$. So this case does not occur.
+\end{proof}
+
+\begin{proposition}[Affine-plane obstruction]\label{prop:plane}
+Let $G$ be a transitive group of automorphisms of a Hadamard tournament of order $v=pt^2$, where $p$ is the distinguished prime. If $r\ne p$ is a prime with $r^2\parallel v$, then $O_r(G)=1$.
+\end{proposition}
+\begin{proof}
+Suppose $R=O_r(G)\ne1$.
+
+\emph{Step 1: $R\cong C_r^3$, and every subgroup of order $r$ is the stabilizer of an $R$-orbit.} Let $N$ be a nontrivial normal $r$-subgroup of $G$. Its orbit size $h_N>1$ is a power of $r$ dividing $v$, so $h_N\in\{r,r^2\}$, and $\nu_r(b_N)$ is even by Lemma~\ref{lem:disc}. So $h_N=r^2$. Apply this to $R$ and to $U=\Omega_1(Z(R))$: they have the same orbits. On each orbit the image of $U$ is its own centralizer (Lemma~\ref{lem:regular-abelian}), so the image of $R$ equals that of $U$, and $R$ is elementary abelian. Proposition~\ref{prop:r-structure} gives the rest. Put $L=r^2+r+1$. We call the subgroups of order $r$ of $R$ \emph{lines}.
+
+\emph{Step 2: the action on lines.} Let $C=C_G(R)$. The group $H=G/C$ acts faithfully on $R$ by conjugation, so $H\le\GL(3,r)$, and $H$ is solvable. The map $x\mapsto R_x$ from $X$ onto the set of lines satisfies $R_{gx}=gR_xg^{-1}$. So $H$ is transitive on lines, and the fibres of the map form a block system with $L>1$ blocks. By the quotient law, $p\mid L$. By Lemma~\ref{lem:linear} we may identify $R$ with $\F_{r^3}$ so that $H\le\GaL(1,r^3)$. Let $M=H\cap\F_{r^3}^\times$, a cyclic normal subgroup of $H$ with $[H:M]$ dividing $3$.
+
+Let $Y$ be the set of $C$-orbits on $X$. The group $H$ acts transitively on $Y$. Since $C$ centralizes $R$, the map $x\mapsto R_x$ is constant on $C$-orbits and induces an $H$-equivariant map from $Y$ onto the lines. So $L$ divides $|Y|$.
+
+\emph{Step 3: elements of $M$ of order prime to $p$ act trivially on $Y$.} Let $\alpha\in M$ have order prime to $p$, and let $g\in G$ map to $\alpha$. Write $g=g_pg_{p'}$ with commuting factors of $p$-power order and of order prime to $p$. The image of $g_p$ is a $p$-element of $\langle\alpha\rangle$, so it is trivial, and $g_{p'}$ maps to $\alpha$. By the fixed-point law $g_{p'}$ fixes a vertex $x$, so $\alpha$ maps the line $R_x$ to itself. If multiplication by $\alpha$ preserves a line $\F_rz$, then $\alpha z=\beta z$ with $\beta\in\F_r$, so $\alpha=\beta\in\F_r^\times$. Such a scalar is central in $\GaL(1,r^3)$. So $\alpha$ is central in $H$ and fixes the point of $Y$ containing $x$; a central element of a transitive group that fixes one point fixes every point.
+
+Hence the image of $M$ in $\Sym(Y)$ is a cyclic $p$-group.
+
+\emph{Step 4: $|Y|=L$.} If $p=3$, the image of $H$ in $\Sym(Y)$ is a $3$-group, so $|Y|$ and its divisor $L$ are powers of $3$. But $L>3$ and $L\not\equiv0\pmod9$. So $p>3$. The $M$-orbits on $Y$ are permuted transitively by $H/M$, so their number divides $3$. Their preimages in $X$ form a block system of $G$, so by the quotient law there is one $M$-orbit: $M$ is transitive on $Y$. Since $L=(r-1)(r+2)+3$, the greatest common divisor of $r-1$ and $L$ divides $3$, and $p\mid L$, so $p\nmid r-1$. As $|M|$ divides $r^3-1=(r-1)L$, the largest power of $p$ dividing $|M|$ divides $L$. So the image of $M$ in $\Sym(Y)$ has order at most $L$, and $|Y|\le L$. With $L\mid|Y|$ we get $|Y|=L$.
+
+Consequently, for each line $K$, the centralizer $C$ is transitive on the set of vertices with stabilizer $K$. The number of $R$-orbits with stabilizer $K$ is $c=v/(r^2L)$, and $r\nmid c$ because $r^2\parallel v$.
+
+\emph{Step 5: a Fourier coefficient is divisible by $r$.} Fix a line $K$ and a nontrivial character $\chi$ of $R$ that is trivial on $K$. Put $\zeta=\zeta_r$ and $\cO=\Z[\zeta]$. Let $V_\chi$ be the space of functions $f\colon X\to\C$ with $f(ax)=\chi(a)f(x)$ for all $a\in R$; it is preserved by $S$. Number the $R$-orbits $O_i$ whose stabilizer $K_i$ lies in $\ker\chi$, choose $x_i\in O_i$, and let $e_i$ be the function with $e_i(ax_i)=\chi(a)$ on $O_i$ and zero elsewhere. The $e_i$ form a basis of $V_\chi$. Define the matrix $A$ by $Se_j=\sum_iA_{ij}e_i$. Evaluating at $x_i$ gives
+\[
+A_{ij}=\sum_{y\in O_j}S[x_i,y]\,e_j(y)\in\cO .
+\]
+Since $\chi\ne1$, the functions in $V_\chi$ are orthogonal to $\one$, so $A^2=-vI$ by Lemma~\ref{lem:S}.
+
+If $K_i\ne K_j$, then $K_i$ acts on $O_j$ with orbits of size $r$. Both $y\mapsto S[x_i,y]$ and $e_j$ are constant on these orbits: the first by Lemma~\ref{lem:rowsum}, the second because $K_i\le\ker\chi$. So $A_{ij}\in r\cO$.
+
+Let $B$ be the $c\times c$ submatrix of $A$ indexed by the orbits with stabilizer $K$. In the corresponding block of $A^2=-vI$, each product $A_{ik}A_{kj}$ with $K_k\ne K$ lies in $r^2\cO$, and $r^2\mid v$. So $(B/r)^2$ has entries in $\cO$. The eigenvalues of $B/r$ are then algebraic integers, because their squares are. So $\tr(B)/r$ is an algebraic integer in $\Q(\zeta)$, hence lies in $\cO$.
+
+The diagonal entry of $B$ at $O_i$ is $d_i=\sum_{a\in R/K}S[x_i,ax_i]\chi(a)$. It does not depend on the choice of $x_i$ in $O_i$, because $R$ is abelian and preserves $S$. For $g\in C$ we have $S[gx_i,agx_i]=S[gx_i,gax_i]=S[x_i,ax_i]$, and $C$ is transitive on the vertices with stabilizer $K$ by Step~4. So all $d_i$ are equal to one number $d\in\cO$, and $cd/r=\tr(B)/r\in\cO$. Since $r\nmid c$, there are integers $m,n$ with $mc+nr=1$, and $d/r=m(cd/r)+nd\in\cO$.
+
+\emph{Step 6: lines missing the origin are monochromatic.} Fix a vertex $x$ with stabilizer $K$, identify its orbit with the plane $R/K\cong\F_r^2$ by $z\mapsto zx$, and put $f(z)=S[x,zx]$. Then $f(0)=0$, $f(z)=\pm1$ for $z\ne0$, and $f(-z)=S[zx,x]=-f(z)$. Write $\chi=\zeta^{\mu}$ with $\mu$ a nonzero linear form on $R/K$; every nonzero linear form arises from some $\chi$. Let $g(u)$ be the sum of $f$ over the affine line $\mu=u$. Then
+\[
+d=\sum_{u\in\F_r}g(u)\zeta^u=\sum_{u=0}^{r-2}\bigl(g(u)-g(r-1)\bigr)\zeta^u .
+\]
+Since $1,\zeta,\dots,\zeta^{r-2}$ is a $\Z$-basis of $\cO$ and $d\in r\cO$, all $g(u)$ are congruent modulo $r$. The line $\mu=0$ passes through $0$ and is closed under $z\mapsto-z$, so $g(0)=0$. For $u\ne0$, $g(u)$ is a sum of $r$ signs, divisible by $r$, and odd; so $g(u)=\pm r$ and $f$ is constant on the line $\mu=u$. Every affine line not through $0$ has this form. So $f$ is constant on every affine line that does not pass through the origin.
+
+\emph{Step 7: contradiction.} Let $z\ne0$ and let $w$ be linearly independent of $z$. The line through $z$ and $w$ and the line through $w$ and $-z$ do not pass through the origin. So $f(z)=f(w)=f(-z)=-f(z)$, which is impossible because $f(z)=\pm1$.
+\end{proof}
+
+\begin{corollary}\label{cor:fitting}
+Let $G$ be as in Proposition~\ref{prop:plane}. No prime $r\ne p$ with $r^2\parallel v$ divides $|F(G)|$. If $v=p^{2a+1}s^2$ with $s$ squarefree and prime to $p$, then $F(G)=O_p(G)$; this group is nontrivial and contains its centralizer in $G$.
+\end{corollary}
+\begin{proof}
+The first statement is Proposition~\ref{prop:plane}. A nontrivial $O_\ell(G)$ has $\ell\mid v$ (Section~\ref{sec:prelim}), and every prime divisor of $s$ is covered by the first statement. The rest is the standard property of the Fitting subgroup of a solvable group.
+\end{proof}
+
+\section{Chief factors}\label{sec:divisor}
+
+Let $G\le\Aut(T)$ be transitive. A \emph{chief series} is a chain $1=N_0<N_1<\dots<N_n=G$ of normal subgroups of $G$ that cannot be refined; every chain of normal subgroups is contained in one. The orbit counts satisfy $b_{N_0}=v$, $b_{N_n}=1$, and $b_{N_j}$ divides $b_{N_{j-1}}$.
+
+\begin{lemma}[Chief step]\label{lem:chief}
+Let $L<K$ be normal subgroups of $G$ such that $K/L$ is an elementary abelian $q$-group for a prime $q\ne p$, and suppose $m=b_L/b_K>1$. Then $m=q^{2i}$ for an integer $i\ge1$, and $b_K>m$.
+\end{lemma}
+\begin{proof}
+The group $K/L$ acts on the set of $L$-orbits, and its orbits there correspond to the $K$-orbits. Each has $m$ elements, so $m$ is a power of $q$. By Lemma~\ref{lem:disc}, $\nu_q(b_L)$ and $\nu_q(b_K)$ are even, since $\nu_q(v)$ is even. So $m=q^{2i}$.
+
+A Sylow $q$-subgroup of $K$ maps onto $K/L$. So every element of $K/L$ is the image of a $q$-element of $K$, which fixes a vertex by the fixed-point law and therefore fixes an $L$-orbit. The stabilizer in the abelian group $K/L$ of an $L$-orbit is the same for all $L$-orbits in one $K$-orbit (Lemma~\ref{lem:regular-abelian}) and has index $m$. So $K/L$ is the union of $b_K$ subgroups of index $m$, and $b_K>m$ by Lemma~\ref{lem:cover}.
+\end{proof}
+
+The number $m$ is the index $[KG_x:LG_x]$ for a vertex $x$. So the first statement, applied to a chief series of a minimal transitive group, is Ito's Theorem~3: if $v$ is not a power of $p$, some chief factor of characteristic $q\ne p$ has $m>1$, because the product of the numbers $m$ over a chief series is $v$. If $G$ is supersolvable, every chief factor has prime order, so $m=q^{2i}>1$ cannot occur and $v$ is a power of $p$. The inequality $b_K>m$ is the additional information; the next proposition sharpens it.
+
+\begin{proposition}[Chief-step bound]\label{prop:chiefbound}
+Let $L<K$ be normal subgroups of $G$ such that $K/L$ is an elementary abelian $r$-group for a prime $r\ne p$, and suppose that $b_L>b_K$. Then
+\[
+b_K\ge r^2+r+1 .
+\]
+\end{proposition}
+\begin{proof}
+Put $A=K/L$ and $b=b_K$. By Lemma~\ref{lem:chief}, $A$ acts on the set $\Omega$ of $L$-orbits with $b$ orbits of size $r^{2i}$, $i\ge1$, and $b>r^{2i}$. If $i\ge2$ then $b>r^4>r^2+r+1$. So let $i=1$.
+
+Let $H_1,\dots,H_b\le A$ be the stabilizers of the $b$ orbits of $A$ on $\Omega$, one for each orbit, with repetitions. They have index $r^2$. Let $W_i=H_i^\perp$, a plane in $A^*=\operatorname{Hom}(A,\F_r)$. For $0\ne\mu\in A^*$ let $n(\mu)$ be the number of indices $i$ with $\mu\in W_i$.
+
+\emph{Claim: $n(\mu)$ is even.} Put $\zeta=\zeta_r$ and $E=\Q(\zeta)$, and let $\chi=\zeta^{\mu}$, a nontrivial character of $A$. Let $V_\chi$ be the $E$-vector space of functions $f\colon X\to E$ with $f(kx)=\chi(kL)f(x)$ for all $k\in K$. Such a function is constant on $L$-orbits, so it is a function on $\Omega$. On an orbit of $A$ on $\Omega$ with stabilizer $H_i$, the functions with this property form a space of dimension $1$ if $\chi$ is trivial on $H_i$, and $0$ otherwise. So $\dim_EV_\chi=n(\mu)$. The matrix $S$ is rational and commutes with $K$, so it maps $V_\chi$ to itself. Since $\chi\ne1$, every function in $V_\chi$ has sum zero on each $K$-orbit, so $J$ vanishes on $V_\chi$ and $S^2=-v$ there by Lemma~\ref{lem:S}. The prime $p$ ramifies in $\Q(\sqrt{-p})=\Q(\sqrt{-v})$ and not in $E$, because $r\ne p$. So $\sqrt{-v}\notin E$, the polynomial $X^2+v$ is irreducible over $E$, and $V_\chi$ is a vector space over the field $E[X]/(X^2+v)$, with $X$ acting as $S$. Its dimension over $E$ is even.
+
+Suppose now that $b\le r^2+r$. Call a point of the projective space of $A^*$ \emph{supported} if it lies in some $W_i$. Each $W_i$ contains $r+1$ points, and by the claim each supported point lies in at least two of the $W_i$. So the number of supported points is at most $b(r+1)/2\le r(r+1)^2/2<r^3$, because $(r+1)^2<2r^2$ for $r\ge3$. Let $n=\dim A^*$. Of the $r^{3n}$ linear maps $A^*\to\F_r^3$, exactly $r^{3n-3}$ vanish on a given point. So fewer than $r^{3n}$ maps vanish on some supported point, and there is a linear map $\pi\colon A^*\to\F_r^3$ that vanishes on none. It is injective on every $W_i$. So each $\pi(W_i)$ is a plane in $\F_r^3$, that is, a line $\ell_i$ of the projective plane of order $r$.
+
+Let $y$ be a point of this projective plane. If $y\in\ell_i$, exactly one point of $W_i$ maps to $y$. So the number of $i$ with $y\in\ell_i$ is the sum of $n(\mu)$ over the supported points $\F_r\mu$ that map to $y$, and it is even. For a line $\ell$ let $m_\ell\in\F_2$ be the number of $i$ with $\ell_i=\ell$, modulo $2$, and let $M$ be the point-by-line incidence matrix of the plane over $\F_2$. We have shown $Mm=0$. A line has $r+1$ points, an even number, and two distinct lines meet in one point, so $M^{T}M=I+J$ over $\F_2$. Hence $m=(\sum_\ell m_\ell)\one$. The sum is $b$ modulo $2$, and $b$ is odd because it divides $v$. So $m=\one$: every one of the $r^2+r+1$ lines occurs among the $\ell_i$, and $b\ge r^2+r+1$. This contradicts $b\le r^2+r$.
+\end{proof}
+
+\section{Fourth-power-free orders}\label{sec:squarefree}
+
+\begin{lemma}[Orbits of size $p^2$]\label{lem:rank}
+Let $P$ be a normal $p$-subgroup of $G$ whose orbits have size $p^2$. Then $\dim P/\Phi(P)\le3$.
+\end{lemma}
+\begin{proof}
+Let $N=\Omega_1(Z(P))$. It is nontrivial, elementary abelian, and normal in $G$, and its orbits have size $p$ or $p^2$.
+
+If they have size $p^2$, they are the $P$-orbits. On each orbit the image of $N$ is its own centralizer (Lemma~\ref{lem:regular-abelian}), and $P$ centralizes $N$, so the image of $P$ equals that of $N$. Since $P$ embeds in the product of its images, $P$ is elementary abelian, and $\dim P\le3$ by Corollary~\ref{lem:rankbound}.
+
+If they have size $p$, then $N\cong C_p$ by Corollary~\ref{lem:prime-orbit}. If $P$ is abelian, it has a unique subgroup of order $p$, so it is cyclic and $\dim P/\Phi(P)=1$. Suppose $P$ is nonabelian. The kernel $P_0$ of the action of $P$ on the set of $N$-orbits is normal in $G$, contains $N$, and has the $N$-orbits as its orbits. So $P_0=N$ by Corollary~\ref{lem:prime-orbit}, and $E=P/N$ acts faithfully on the $N$-orbits. Each $E$-orbit there has $p$ elements, so $E$ embeds in a product of groups of order $p$ and is elementary abelian. Hence $1\ne[P,P]\le N$, so $[P,P]=N$, and the commutator defines a nonzero alternating bilinear form $E\times E\to N\cong\F_p$. Let $\omega$ be an $N$-orbit and $U_\omega\le E$ its stabilizer, a hyperplane. The preimage of $U_\omega$ in $P$ acts on the $p$ points of $\omega$ and centralizes $N$, which is regular on $\omega$; by Lemma~\ref{lem:regular-abelian} this preimage acts on $\omega$ through an abelian group. Its commutators lie in $N$ and act trivially on $\omega$, so they are trivial. Thus $U_\omega$ is totally isotropic. A nonzero alternating form with a totally isotropic hyperplane has rank two, and every totally isotropic hyperplane contains its radical, because its image in the nondegenerate quotient of dimension two has dimension at most one. The intersection of the $U_\omega$ is trivial because $E$ is faithful. So the radical is zero, $\dim E=2$, and $\Phi(P)=N$ because $[P,P]=N$ and $P/N$ is elementary abelian.
+\end{proof}
+
+\begin{lemma}\label{lem:smalllinear}
+Let $p\equiv3\pmod4$ be prime, let $d\le3$, and let $D\le\GL(d,p)$ be an irreducible solvable group of odd order. If $p=d=3$, then $|D|$ divides $39$. Otherwise $p\nmid|D|$.
+\end{lemma}
+\begin{proof}
+If $d=1$ then $|D|$ divides $p-1$. Let $d\in\{2,3\}$. The image $\bar D$ of $D$ in the projective group is nontrivial, because scalars are not irreducible. Let $A$ be a minimal normal subgroup of $\bar D$ and $B$ its preimage in $D$.
+
+\emph{$B$ abelian.} As in the proof of Lemma~\ref{lem:linear}, $p\nmid|B|$, and $D$ permutes the isotypic components of the $B$-module $\F_p^d$, transitively because $D$ is irreducible. If there is one component, $\F_p[B]$ is a field of degree dividing $d$ and greater than $1$, hence of degree $d$, and $D\le\GaL(1,p^d)$ has order dividing $d(p^d-1)$. If there are several, there are $d$ components of dimension one, and $|D|$ divides $(p-1)^dd!$. For $p\ge7$ these numbers are prime to $p$, and so are they for $p=3$, $d=2$. For $p=d=3$ they are $78$ and $48$, and an odd divisor of either divides $39$.
+
+\emph{$B$ nonabelian.} Commutators in $B$ are scalars of determinant one and of odd order. For $d=2$ such a scalar is $1$. So $d=3$ and $p\equiv1\pmod3$; in particular $p\ge7$. As in the proof of Lemma~\ref{lem:linear}, $A$ has order $9$, the commutator pairing on $A$ is nondegenerate, and matrices $M_a$ over the elements of $A$ span the matrix algebra. Let $x\in D$ centralize $A$ modulo scalars. Then $xM_ax^{-1}=\theta(a)M_a$ for a character $\theta$ of $A$, and by nondegeneracy there is $M_b$ with $M_bM_aM_b^{-1}=\theta(a)M_a$ for all $a$. So $M_b^{-1}x$ commutes with every $M_a$, hence is scalar, and the image of $x$ lies in $A$. Therefore $\bar D/A$ embeds in $\Aut(A)\cong\GL(2,3)$, of order $48$, and $|D|$ divides $(p-1)\cdot9\cdot48$, which is prime to $p$.
+\end{proof}
+
+\begin{lemma}\label{lem:frattini}
+Let $G$ be a finite group and $P=O_p(G)$, and suppose $C_G(P)\le P$. Put $V=P/\Phi(P)$ and $H=G/P$. Then $P$ is the kernel of the action of $G$ on $V$ by conjugation, $O_p(H)=1$, and $H$ acts faithfully on the direct sum of the composition factors of the $H$-module $V$.
+\end{lemma}
+\begin{proof}
+Let $Y$ be the kernel of the action of $G$ on $V$. It contains $P$, because $V$ is abelian. An automorphism of $P$ that is trivial on $P/\Phi(P)$ has $p$-power order: the group of such automorphisms acts freely on the set of ordered generating tuples that lift a fixed basis of $P/\Phi(P)$, and the number of these lifts is a power of $p$. So $Y/C_G(P)$ is a $p$-group, and with $C_G(P)\le P$ the normal subgroup $Y$ is a $p$-group. Hence $Y=P$. The preimage in $G$ of a normal $p$-subgroup of $H$ is a normal $p$-subgroup of $G$, so $O_p(H)=1$. The kernel of $H$ on the direct sum of the composition factors of $V$ acts on $V$ by unipotent matrices, so it is a normal $p$-subgroup of $H$, hence trivial.
+\end{proof}
+
+\begin{proposition}\label{prop:endgame}
+Let $G$ be a transitive group of automorphisms of a Hadamard tournament of order $v=p^{2a+1}s^2$, where $p$ is the distinguished prime and $s>1$ is prime to $p$. Suppose that $F(G)$ is a $p$-group, and let $p^k$ be the size of an orbit of $P=O_p(G)$. Then $3\le k\le2a$. In particular $a\ge2$.
+\end{proposition}
+\begin{proof}
+Since $F(G)$ is nontrivial and contains its centralizer, $P=F(G)\ne1$ and $C_G(P)\le P$. So $k\ge1$ and $b_P=p^{2a+1-k}s^2>1$. By the quotient law $p\mid b_P$, so $k\le2a$. The group $G/P$ is transitive on the $P$-orbits, so
+\begin{equation}\label{eq:divides}
+ps^2\ \text{divides}\ |G/P| .
+\end{equation}
+
+\emph{The case $k=1$.} By Corollary~\ref{lem:prime-orbit}, $P\cong C_p$. Then $C_G(P)=P$ and $G/P$ embeds in $\Aut(C_p)$, of order $p-1$. This contradicts~\eqref{eq:divides}.
+
+\emph{The case $k=2$.} By Lemma~\ref{lem:rank}, the space $V=P/\Phi(P)$ has dimension at most $3$ over $\F_p$. By Lemma~\ref{lem:frattini}, $H=G/P$ embeds in the product of its images $D_i\le\GL(V_i)$ on the composition factors $V_1,\dots,V_n$ of $V$. These images are irreducible, solvable and of odd order, and $\sum_i\dim V_i\le3$. If $p\ge7$, or if $p=3$ and no $V_i$ has dimension $3$, then $p\nmid|H|$ by Lemma~\ref{lem:smalllinear}, contrary to~\eqref{eq:divides}. If $p=3$ and some $V_i$ has dimension $3$, then $n=1$ and $|H|$ divides $39$, so $3s^2$ divides $39$, which is impossible for odd $s>1$.
+
+So $3\le k\le2a$, and $a\ge2$.
+\end{proof}
+
+The proof uses no property of $s$ other than $s>1$ and $p\nmid s$, and it uses none of the theorems quoted in Section~\ref{sec:linear}. That section improves $k\ge3$ to $2k-1>p$, using three quoted theorems.
+
+\begin{proof}[Proof of Theorem~\ref{thm:fourthfree}]
+Suppose a vertex-transitive Hadamard tournament of order $v$ exists. By Proposition~\ref{prop:laws}(1), $v=pt^2$ with $p\equiv3\pmod4$. Since no fourth power of a prime divides $v$, the exponent of $p$ is $1$ or $3$ and every other prime divisor has exponent $2$. So $v=p^{2a+1}s^2$ with $a\le1$ and $s$ odd, squarefree and prime to $p$. If $s>1$, let $G$ be a transitive group of automorphisms; then $F(G)$ is a $p$-group by Corollary~\ref{cor:fitting}, and $a\ge2$ by Proposition~\ref{prop:endgame}. So $s=1$ and $v\in\{p,p^3\}$. Conversely, $p$ and $p^3$ are congruent to $3$ modulo $4$, and the Paley tournaments on $\F_p$ and $\F_{p^3}$ are vertex-transitive Hadamard tournaments.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cor:cayley}]
+By Theorem~\ref{thm:fourthfree} the order is $p$ or $p^3$. By Maru\v{s}i\v{c}'s theorem~\cite[p.~115, abstract]{Marusic}, a vertex-transitive digraph of order $p^k$, $k\le3$, is a Cayley digraph; that is, its automorphism group contains a subgroup $R$ acting regularly on the vertices. As explained in the introduction, the tournament is then the Cayley tournament of a subset $D\subset R$, and $D$ is a skew Hadamard difference set: $D$, $D^{-1}$ and $\{1\}$ partition $R$ because exactly one of $1\to g$, $g\to1$ holds for $g\ne1$, and the number of representations $g=d_1d_2^{-1}$ is the number of common out-neighbours of $1$ and $g$.
+\end{proof}
+
+
+\begin{proof}[Proof of Corollary~\ref{cor:cubefree}]
+A cube-free integer is fourth-power-free, and $p^3$ is not cube-free. So $v=p$ by Theorem~\ref{thm:fourthfree}. A transitive group of prime degree $p$ contains an element of order $p$, which is a $p$-cycle. So the tournament is the Cayley tournament of a skew Hadamard difference set $D$ in $\Z_p$. We show that $D$ is the set of squares or the set of non-squares; the map $x\mapsto-x$ exchanges the two tournaments. Historically this is the theorem of Kelly~\cite{Kelly} and Johnsen~\cite{Johnsen}, as quoted by Ito \cite[p.~37]{Ito84}; we give the direct argument. Let $\chi$ be a nontrivial character of $\Z_p$ and $\chi(D)=\sum_{d\in D}\chi(d)$. Since $\Z_p$ is the disjoint union of $\{0\}$, $D$ and $-D$, we have $\chi(D)+\overline{\chi(D)}=-1$, and the difference-set property gives $\chi(D)\overline{\chi(D)}=k-\lambda=(p+1)/4$. So $\chi(D)=(-1\pm\sqrt{-p})/2$, which lies in $\Q(\sqrt{-p})$. Let $c$ be a nonzero square modulo $p$. The automorphism $\zeta_p\mapsto\zeta_p^c$ of $\Q(\zeta_p)$ fixes $\Q(\sqrt{-p})$, so $\chi(cD)=\chi(D)$ for every character $\chi$, and $cD=D$ by Fourier inversion. So $D$ is a union of orbits of the group of nonzero squares on $\Z_p\setminus\{0\}$. These orbits are the squares and the non-squares, each of size $(p-1)/2=|D|$, so $D$ is one of them.
+\end{proof}
+
+
+\section{When the Fitting subgroup is a \texorpdfstring{$p$}{p}-group}\label{sec:linear}
+
+Throughout this section we assume the following, which we call the \emph{Fitting hypothesis}: $G$ is a transitive group of automorphisms of a Hadamard tournament of mixed order $v=p^{\alpha}s^2$, where $p$ is the distinguished prime, $\alpha=2a+1$, $s>1$ and $p\nmid s$; and $F(G)$ is a $p$-group. We write $P=O_p(G)$, $p^k$ for the size of a $P$-orbit, $H=G/P$, and $Y$ for the set of $P$-orbits. By Corollary~\ref{cor:fitting} the Fitting hypothesis holds for every transitive group of automorphisms when $s$ is squarefree, and by Proposition~\ref{thm:fittingclass} it holds in a larger class of orders.
+
+All results of this section are necessary conditions. We do not know a tournament that satisfies the Fitting hypothesis.
+
+\subsection{Preliminaries}
+
+\begin{lemma}\label{lem:basic}
+Under the Fitting hypothesis:
+\begin{enumerate}
+\item $P=F(G)\ne1$ and $C_G(P)\le P$;
+\item $3\le k\le2a$, and $|Y|=p^{\alpha-k}s^2$ is divisible by $p$ and divides $|H|$;
+\item $H$ is solvable of odd order, $O_p(H)=1$, and $F(H)$ is a nontrivial group of order prime to $p$ that contains its centralizer in $H$;
+\item every element of $H$ of order prime to $p$ fixes a point of $Y$;
+\item there is a prime $r$ dividing $s$ with $r^2+r+1\le p^{\alpha-k}$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(1) and (2) are in Proposition~\ref{prop:endgame} and its proof. (3) $H\ne1$ because $|Y|>1$. The preimage in $G$ of a normal $p$-subgroup of $H$ is a normal $p$-subgroup of $G$, so $O_p(H)=1$ and $F(H)$ has order prime to $p$. The rest is Lemma~\ref{lem:odd} and the property of the Fitting subgroup of a solvable group.
+
+(4) Let $h\in H$ have order prime to $p$ and let $g\in G$ map to $h$. Write $g=g_pg_{p'}$ with commuting factors of $p$-power order and of order prime to $p$. The image of $g_p$ is a $p$-element of $\langle h\rangle$, so it is trivial, and $g_{p'}$ maps to $h$. By the fixed-point law $g_{p'}$ fixes a vertex, so $h$ fixes the $P$-orbit of that vertex.
+
+(5) Take a chief series of $G$ through $P$. The ratios $b_{N_{j-1}}/b_{N_j}$ of the steps above $P$ have product $b_P=p^{\alpha-k}s^2$, and each is a power of the characteristic of its step. Since $s>1$, some step above $P$ has ratio greater than $1$ and characteristic different from $p$. Let $L<K$ be the last such step and $r$ its characteristic. Then $r$ divides $s$. All later ratios are powers of $p$, and their product is $b_K$, which divides $b_P$. So $b_K\le p^{\alpha-k}$, and $b_K\ge r^2+r+1$ by Proposition~\ref{prop:chiefbound}.
+\end{proof}
+
+We use three theorems from the literature.
+
+\begin{theorem}[Hall and Higman~\cite{HallHigman}, Theorem~B, for groups of odd order]\label{thm:HH}
+Let $p$ be an odd prime, $K$ a field of characteristic $p$, and $M$ a finite-dimensional vector space over $K$. Let $\Gamma\le\GL(M)$ be a finite solvable group of odd order with $O_p(\Gamma)=1$. Then every element of order $p$ of $\Gamma$ has minimal polynomial $(X-1)^p$ on $M$. In particular, if $p$ divides $|\Gamma|$ then $\dim M\ge p$.
+\end{theorem}
+
+
+\begin{theorem}[Aschbacher and Smith~\cite{AS}, Definition~A.1.20 and Lemma~A.1.21]\label{thm:AS}
+Let $p$ be an odd prime and $P\ne1$ a finite $p$-group. Then $P$ has a characteristic subgroup $D\ne1$ of exponent $p$ and nilpotency class at most $2$ such that every non-identity automorphism of $P$ of order prime to $p$ induces a non-identity automorphism of $D/\Phi(D)$.
+\end{theorem}
+
+
+\begin{theorem}[Dixon~\cite{Dixon}, Corollary~1]\label{thm:Dixon}
+Let $p$ be an odd prime and let $\Gamma$ be a finite solvable, completely reducible subgroup of $\GL(n,K)$, where $K$ is a perfect field of characteristic $p$. If $p$ is not a Fermat prime, then $\nu_p(|\Gamma|)\le\sum_{i\ge1}\lfloor n/p^i\rfloor$. If $p$ is a Fermat prime, then $\nu_p(|\Gamma|)\le\sum_{i\ge0}\lfloor n/((p-1)p^i)\rfloor$.
+\end{theorem}
+
+
+\subsection{The detecting subgroup and its commutator forms}
+
+Assume the Fitting hypothesis. Fix a subgroup $D$ of $P$ as in Theorem~\ref{thm:AS}, and put
+\[
+Z=Z(D),\qquad V=D/Z,\qquad n=\dim_{\F_p}Z .
+\]
+The groups $D$ and $Z$ are characteristic in $P$, hence normal in $G$. Since $D$ has exponent $p$ and class at most $2$, both $Z$ and $V$ are elementary abelian, and $\Phi(D)\le Z$. Let $p^e$ be the size of a $Z$-orbit; then $1\le e\le k$. For a vertex $x$ let $Z_x$ be its stabilizer in $Z$ and $Z_x^\perp\le Z^*=\operatorname{Hom}(Z,\F_p)$ its annihilator. We call $\lambda\in Z^*$ \emph{admissible} if it lies in $Z_x^\perp$ for some vertex $x$. The commutator induces a map $V\times V\to Z$, $(dZ,d'Z)\mapsto[d,d']$, which is bilinear and alternating because $D$ has class at most $2$. For $\lambda\in Z^*$ let
+\[
+B_\lambda(y,y')=\lambda([d,d'])\qquad(y=dZ,\ y'=d'Z),
+\]
+an alternating bilinear form on $V$.
+
+\begin{lemma}\label{lem:forms}\leavevmode
+\begin{enumerate}
+\item $n\le2e-1$.
+\item Each $Z_x^\perp$ has dimension $e$, and the admissible functionals span $Z^*$.
+\item If $\lambda\in Z_x^\perp$, then $\rank B_\lambda\le2(k-e)$.
+\item If $y\in V$ and $B_\lambda(y,y')=0$ for all admissible $\lambda$ and all $y'\in V$, then $y=0$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(1) is Corollary~\ref{lem:rankbound}. (2) $[Z:Z_x]=p^e$, and $\bigcap_xZ_x=1$ because $G$ is faithful on $X$; the span of the $Z_x^\perp$ is the annihilator of this intersection.
+
+(3) The image of the stabilizer $D_x$ in $V$ is totally isotropic for $B_\lambda$, because $[D_x,D_x]\le D_x\cap Z=Z_x$ and $\lambda(Z_x)=0$. Its index in $V$ is $[D:D_xZ]=[D:D_x]/[Z:Z_x]=|Dx|/p^e\le p^{k-e}$, since the $D$-orbit of $x$ lies in a $P$-orbit. An alternating form with a totally isotropic subspace of codimension $c$ has rank at most $2c$: in the quotient by the radical, of dimension equal to the rank $\rho$, the image of the subspace is totally isotropic, so it has dimension at most $\rho/2$, and it has codimension at most $c$.
+
+(4) Let $y=dZ$. By (2), $[d,d']=1$ for all $d'\in D$. So $d\in Z$.
+\end{proof}
+
+\begin{lemma}[Faithful representation]\label{thm:rep}
+Under the Fitting hypothesis, $H=G/P$ acts faithfully on the direct sum of the composition factors of the $G$-module $D/\Phi(D)$.
+\end{lemma}
+\begin{proof}
+Let $M$ be the direct sum of the composition factors of the $G$-module $D/\Phi(D)$, and $N$ the kernel of $G$ on $M$. A normal $p$-subgroup has a nonzero fixed space on a simple module in characteristic $p$, and this fixed space is a submodule; so $P\le N$. Let $g\in N$ have order prime to $p$. It acts on $D/\Phi(D)$ by a unipotent matrix whose order is prime to $p$, hence trivially. Conjugation by $g$ is an automorphism of $P$ of order prime to $p$. By Theorem~\ref{thm:AS} it is the identity, so $g\in C_G(P)\le P$ and $g=1$. By Cauchy's theorem $N$ is a $p$-group. It is normal, so $N=P$, and $H$ is faithful on $M$.
+\end{proof}
+
+\subsection{A coprime group acting on the detecting subgroup}
+
+\begin{lemma}\label{lem:uA}
+Assume the Fitting hypothesis and let $h\in H$ have order $p$. Then there are a subgroup $E\le G$ of order prime to $p$ and an element $u\in N_G(E)$ of $p$-power order with image $h$ in $H$ such that the subgroup $A=[E,u]$ generated by the commutators $xux^{-1}u^{-1}$, $x\in E$, has the following properties.
+\begin{enumerate}
+\item $A\ne1$, $A\le E$, $u$ normalizes $A$, $[A,u]=A$, and $u^p$ centralizes $A$.
+\item Suppose there is a chain $1=Z_0<Z_1<\dots<Z_l=Z$ of subgroups normalized by $E$ and $u$ such that $u$ centralizes every $Z_i/Z_{i-1}$. Then $A$ centralizes $Z$, acts faithfully on $V=D/Z$, and preserves every form $B_\lambda$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+Let $\hat F$ be the preimage of $F(H)$ in $G$. Then $P$ is a normal Sylow $p$-subgroup of $\hat F$. By the Schur--Zassenhaus theorem $P$ has a complement $E$ in $\hat F$, and all complements are conjugate under $P$. For $g\in G$ the group $gEg^{-1}$ is a complement, so it equals $yEy^{-1}$ with $y\in P$, and $y^{-1}g\in N_G(E)$. Hence $G=PN_G(E)$, and $N_G(E)$ maps onto $H$. Let $N_1$ be the set of elements of $N_G(E)$ whose image lies in $\langle h\rangle$. A Sylow $p$-subgroup of $N_1$ maps onto $\langle h\rangle$; choose $u$ in it with image $h$.
+
+The element $u^p$ lies in $P\cap N_G(E)$. For $y\in P\cap N_G(E)$ and $x\in E$ the commutator $yxy^{-1}x^{-1}$ lies in $E$ and in $P$, so it is trivial. So $u^p$ centralizes $E$. The group $E$ maps isomorphically onto $F(H)$, and conjugation by $u$ on $E$ corresponds to conjugation by $h$ on $F(H)$. By Lemma~\ref{lem:basic}(3), $h\notin F(H)$ does not centralize $F(H)$. So $u$ induces an automorphism of order $p$ of the group $E$, whose order is prime to $p$. Hence $A=[E,u]\ne1$; it is a subgroup of $E$ normalized by $E$ and $u$; and $[A,u]=A$. This is the standard identity $[E,u,u]=[E,u]$ for coprime action; we include the short proof. Put $\alpha(x)=uxu^{-1}$, so that $A$ is generated by the elements $x\alpha(x)^{-1}$ with $x\in E$, and $\alpha$ acts trivially on $E/A$. So $\langle\alpha\rangle$, of order $p$, permutes each coset $Ax$, whose size $|A|$ is prime to $p$, and fixes an element $c$ of it. Then $x=ac$ with $a\in A$ and $\alpha(c)=c$, and $x\alpha(x)^{-1}=a\alpha(a)^{-1}\in[A,u]$. Hence $A\le[A,u]\le A$. This proves (1).
+
+(2) Since $u$ centralizes $Z_i/Z_{i-1}$, so does every commutator $xux^{-1}u^{-1}$ with $x\in E$, and so does $A$. So $A$ acts on $Z$ by unipotent matrices. Its order is prime to $p$, so it centralizes $Z$. Let $g\in A$ act trivially on $V$. Since $\Phi(D)\le Z$, $g$ acts trivially on $D/Z$ and on $Z/\Phi(D)$, hence unipotently, hence trivially, on $D/\Phi(D)$. By Theorem~\ref{thm:AS}, $g$ centralizes $P$. So $g\in C_G(P)\cap E\le P\cap E=1$. Finally, for $g\in A$ and $d,d'\in D$ we have $[gdg^{-1},gd'g^{-1}]=g[d,d']g^{-1}=[d,d']$.
+\end{proof}
+
+
+In the situation of Lemma~\ref{lem:uA}(2) we extend scalars to $\Kb$, an algebraic closure of $\F_p$. Put $\bar V=V\otimes\Kb$ and $\bar Z=Z\otimes\Kb$, let $\beta\colon\bar V\times\bar V\to\bar Z$ be the bilinear extension of the commutator map, and extend each $\lambda\in Z^*$ to a linear map $\bar Z\to\Kb$. Then $B_\lambda=\lambda\circ\beta$, with the same rank as over $\F_p$, and $\beta(gy,gy')=g\beta(y,y')$ for $g\in\langle A,u\rangle$. Since $|A|$ is prime to $p$, $\bar V$ is the direct sum of its isotypic components $V_\tau$, where $\tau$ runs over the isomorphism types of irreducible $\Kb A$-modules. We say that $\tau$ \emph{occurs} if $V_\tau\ne0$. Since $u$ normalizes $A$, it permutes the components $V_\tau$, and since $u^p$ centralizes $A$, each orbit of $\langle u\rangle$ on the types that occur has length $1$ or $p$.
+
+\begin{lemma}\label{lem:types}
+In the situation of Lemma~\ref{lem:uA}(2):
+\begin{enumerate}
+\item For every type $\tau$ and every $0\ne y_0\in V_\tau$ there are $y'\in\bar V$ and an admissible $\lambda$ with $\lambda(\beta(y_0,y'))\ne0$.
+\item If $\lambda\in Z^*$, $y_0\in V_\tau$ and $B_\lambda(y_0,y')\ne0$ for some $y'\in\bar V$, then the quotient of $\bar V$ by the radical of $B_\lambda$ is a $\Kb A$-module of dimension $\rank B_\lambda$ in which $\tau$ occurs.
+\item If $u$ fixes every type that occurs, then some type that occurs has dimension at least $p$.
+\item A nontrivial irreducible $\Kb A$-module $U$ is not isomorphic to its dual $U^*$. If $U$ occurs in the quotient of $\bar V$ by the radical of some $B_\lambda$, then $U^*$ occurs there too.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(1) By Lemma~\ref{lem:forms}(4) the linear map $V\to\operatorname{Hom}(V,Z)$, $y\mapsto\beta(y,\cdot)$, is injective, and it stays injective after extension of scalars. So there is $y'$ with $\beta(y_0,y')\ne0$. The admissible functionals span $Z^*$, hence the dual of $\bar Z$, so one of them does not vanish at $\beta(y_0,y')$.
+
+(2) The radical $\{y:B_\lambda(y,\cdot)=0\}$ is an $A$-submodule by Lemma~\ref{lem:uA}(2), so it is the sum of its intersections with the $V_\tau$, and the quotient is the direct sum of the quotients of the $V_\tau$. The vector $y_0$ is not in the radical.
+
+(3) Let $\rho$ be a type that occurs and $A_\rho$ its kernel in $A$. Since $u$ fixes the type, $u$ normalizes $A_\rho$ and induces an automorphism of $A/A_\rho\cong\rho(A)$. Suppose that this automorphism is trivial for every $\rho$ that occurs. Then every commutator of $u$ with an element of $A$ lies in every $A_\rho$ and acts trivially on $\bar V$; so $A=[A,u]$ acts trivially on $V$, contrary to Lemma~\ref{lem:uA}. So there is a type $\rho$ that occurs, on a space $U$, such that $u$ induces a non-identity automorphism of $\rho(A)$. Since $u$ fixes the type, there is an invertible linear map $T_0$ of $U$ with $T_0\rho(g)T_0^{-1}=\rho(ugu^{-1})$ for all $g\in A$. Its $p$-th power commutes with $\rho(A)$, because $u^p$ centralizes $A$, so it is a scalar by Schur's lemma. Multiplying $T_0$ by a scalar we obtain $T_1$ with $T_1^p=1$, and $T_1\ne1$. The group $\Gamma=\rho(A)\langle T_1\rangle$ has order $p\,|\rho(A)|$, which is odd, so $\Gamma$ is solvable. A normal $p$-subgroup of $\Gamma$ centralizes the normal subgroup $\rho(A)$ of order prime to $p$, so it consists of scalars, and $\Kb$ has no scalar of order $p$. So $O_p(\Gamma)=1$, and $\dim U\ge p$ by Theorem~\ref{thm:HH}.
+
+(4) Let $\sigma$ be the linear map of $U\otimes U$ exchanging the factors, and $\pi=|A|^{-1}\sum_{g\in A}g\otimes g$ the projection onto the invariants $(U\otimes U)^A$. The trace of $\sigma$ on $(U\otimes U)^A$ is $\tr(\sigma\pi)=|A|^{-1}\sum_g\tr_U(g^2)$. Since $|A|$ is odd, $g\mapsto g^2$ is a bijection of $A$, so this is $|A|^{-1}\sum_g\tr_U(g)$, the trace of the projection of $U$ onto $U^A=0$. So the trace is $0$. If $U\cong U^*$, then $(U\otimes U)^A\cong\operatorname{Hom}_A(U^*,U)$ has dimension one, $\sigma$ acts on it as $\pm1$, and the trace is $\pm1\ne0$ in $\Kb$. So $U\not\cong U^*$. The quotient by the radical of $B_\lambda$ carries a nondegenerate $A$-invariant bilinear form, so it is isomorphic to its dual.
+\end{proof}
+
+\subsection{The linear bound}
+
+\begin{theorem}[Linear bound]\label{thm:linear}
+Under the Fitting hypothesis,
+\[
+p\le2k-1\le4a-1 .
+\]
+More precisely, $p\le n$ or $p\le2k-2$, where $n=\dim Z(D)\le2e-1\le2k-1$.
+\end{theorem}
+\begin{proof}
+Suppose $p>n$. By Lemma~\ref{lem:basic}, $p$ divides $|H|$; let $h\in H$ have order $p$, and let $E$, $u$ and $A$ be as in Lemma~\ref{lem:uA}.
+
+\emph{The action on $Z$.} Let $\Gamma$ be the image of $E\langle u\rangle$ in the group of linear maps of the direct sum $M$ of the composition factors of $Z$ as a module for $E\langle u\rangle$. A normal $p$-subgroup of $\Gamma$ acts trivially on each simple summand, so $O_p(\Gamma)=1$. The group $\Gamma$ is solvable of odd order and $\dim M=n<p$. By Theorem~\ref{thm:HH}, $p\nmid|\Gamma|$. So the $p$-element $u$ acts trivially on $M$, and the hypothesis of Lemma~\ref{lem:uA}(2) holds for a composition series of $Z$. We use the notation introduced before Lemma~\ref{lem:types}.
+
+\emph{Case 1: some type $\tau$ that occurs is moved by $u$.} The types $u^j\tau$, $0\le j<p$, are distinct. Choose $0\ne y_0\in V_\tau$, and $y'$ and an admissible $\lambda$ with $\lambda(z)\ne0$ for $z=\beta(y_0,y')$, by Lemma~\ref{lem:types}(1). On $\bar Z$ we have $u=1+N$ with $N^n=0$, because $u$ has $p$-power order and $\dim\bar Z=n$. So for $0\le j<p$
+\[
+\lambda(u^jz)=\sum_{i=0}^{n-1}\binom ji\lambda(N^iz).
+\]
+Since $n<p$, the numbers $i!$ with $i<n$ are invertible in $\F_p$, and the right side is a polynomial in $j$ of degree at most $n-1$ with coefficients in $\Kb$. Its value at $j=0$ is $\lambda(z)\ne0$. So it is nonzero for at least $p-n+1$ of the values $j=0,\dots,p-1$. For these $j$,
+\[
+B_\lambda(u^jy_0,u^jy')=\lambda(u^jz)\ne0,
+\]
+and $u^jy_0$ lies in the isotypic component of the type $u^j\tau$. By Lemma~\ref{lem:types}(2) at least $p-n+1$ distinct types occur in the quotient of $\bar V$ by the radical of $B_\lambda$. With Lemma~\ref{lem:forms}(3),
+\[
+p-n+1\le\rank B_\lambda\le2(k-e),
+\]
+so $p\le2(k-e)+n-1\le2k-2$.
+
+\emph{Case 2: $u$ fixes every type that occurs.} By Lemma~\ref{lem:types}(3) some type $\rho$ that occurs has dimension at least $p$. By Lemma~\ref{lem:types}(1) and~(2) it occurs in the quotient of $\bar V$ by the radical of $B_\lambda$ for some admissible $\lambda$. So $p\le\rank B_\lambda\le2(k-e)\le2k-2$.
+
+Finally $n\le2e-1\le2k-1$ and $k\le2a$.
+\end{proof}
+
+\subsection{Detecting elements of order \texorpdfstring{$p$}{p} on the centre}
+
+\begin{theorem}[Centre detection]\label{thm:center}
+Assume the Fitting hypothesis and $k\le p$. Then no element of order $p$ of $H$ acts trivially on every composition factor of the $G$-module $Z=Z(D)$. Consequently:
+\begin{enumerate}
+\item if $p\ge7$, or if $p=3$ and $k<3$, then $\nu_p(|H|)=1$ and $\alpha=k+1$;
+\item if $p=k=3$, then $\nu_3(|H|)\le2$ and $\alpha-k\le2$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+The group $P$ acts trivially on each composition factor of the $G$-module $Z$, so $H$ acts on them. Suppose $h\in H$ of order $p$ acts trivially on all of them. Let $E$, $u$, $A$ be as in Lemma~\ref{lem:uA}. A composition series of the $G$-module $Z$ satisfies the hypothesis of Lemma~\ref{lem:uA}(2). So $A$ centralizes $Z$ and acts faithfully on $V$, and we use the notation introduced before Lemma~\ref{lem:types}. Put $t=k-e$; then $0\le t\le k-1\le p-1$.
+
+\emph{Case 1: $u$ fixes every type that occurs.} By Lemma~\ref{lem:types}(1)--(3), a type $U$ of dimension at least $p$ occurs in the quotient of $\bar V$ by the radical of $B_\lambda$ for some admissible $\lambda$. The type $U$ is nontrivial, so by Lemma~\ref{lem:types}(4) the different type $U^*$ occurs there as well. Hence $2p\le\rank B_\lambda\le2t<2p$, a contradiction.
+
+\emph{Case 2: some type $U$ that occurs is moved by $u$.} Then $U$ is nontrivial. Choose $0\ne y_0\in V_U$ and $y'$ with $z=\beta(y_0,y')\ne0$, and choose a vertex $x$ such that some element of $W=Z_x^\perp$ does not vanish at $z$ (Lemma~\ref{lem:types}(1)). Put $z_j=u^jz=\beta(u^jy_0,u^jy')$ for $0\le j<p$.
+
+The $2p$ types $u^jU$ and $(u^jU)^*$, $0\le j<p$, are pairwise distinct. Indeed, the $u^jU$ are distinct, and if $u^iU\cong(u^jU)^*$ then, with $c=i-j$, $u^cU\cong U^*$ and $u^{2c}U\cong(u^cU)^*\cong U$; so $p$ divides $c$ and $U\cong U^*$, contrary to Lemma~\ref{lem:types}(4).
+
+Let $\lambda\in W$. If $\lambda(z_j)\ne0$, then $u^jU$ and its dual occur in the quotient of $\bar V$ by the radical of $B_\lambda$, by Lemma~\ref{lem:types}(2) and~(4). Since $\rank B_\lambda\le2t$, at most $t$ of the numbers $\lambda(z_j)$, $0\le j<p$, are nonzero.
+
+Call $j$ \emph{active} if $\lambda(z_j)\ne0$ for some $\lambda\in W$, and let $m$ be the number of active indices. For an active $j$, the map $\lambda\mapsto\lambda(z_j)$ from $W$ to $\Kb$ is $\F_p$-linear and nonzero, so its kernel has at most $|W|/p$ elements. Counting the pairs $(j,\lambda)$ with $\lambda(z_j)\ne0$ in two ways, and noting that $\lambda=0$ belongs to no pair,
+\[
+m\,p^e(1-1/p)\le t\,(p^e-1).
+\]
+The index $j=0$ is active, so $m\ge1$ and $t\ge1$. Then $m<tp/(p-1)=t+t/(p-1)\le t+1$, so $m\le t$. So at least $p-t$ indices $j$ are inactive, and for these $z_j$ lies in $W^0=Z_x\otimes\Kb$, the common kernel of the elements of $W$. This space has dimension $n-e$ and does not contain $z=z_0$.
+
+Let $\Delta=u-1$ on $\bar Z$; it is nilpotent. Let $c$ be the least integer with $\Delta^cz=0$ and $d=\min(c,p)$. The vectors $z,\Delta z,\dots,\Delta^{c-1}z$ are linearly independent. For $0\le j<p$,
+\[
+z_j=(1+\Delta)^jz=\sum_{i=0}^{d-1}\binom ji\,\Delta^iz ,
+\]
+because the terms with $i\ge c$ vanish and $i\le j<p$. For $q\le d$ distinct indices $j_1,\dots,j_q$ in $[0,p)$, the matrix $\bigl(\binom{j_l}{i}\bigr)$ with $1\le l\le q$ and $0\le i<q$ has determinant $\prod_{l<l'}(j_{l'}-j_l)/\prod_{i<q}i!$, which is nonzero in $\F_p$. So any $q\le d$ of the vectors $z_j$ are linearly independent. If there were $d$ inactive indices, the corresponding $z_j$ would span the space spanned by $z,\Delta z,\dots,\Delta^{d-1}z$, which contains $z$; but they lie in $W^0$ and $z$ does not. So there are fewer than $d$ inactive indices, their vectors $z_j$ are linearly independent, and
+\[
+p-t\le n-e .
+\]
+With $n\le2e-1$ this gives $p\le k+n-2e\le k-1$, contrary to $k\le p$.
+
+\emph{The consequences.} Let $\Gamma$ be the image of $H$ in the group of linear maps of the direct sum of the composition factors of the $G$-module $Z$, a space of dimension $n$ over $\F_p$. The kernel has no element of order $p$, so $\nu_p(|\Gamma|)=\nu_p(|H|)$. The group $\Gamma$ is solvable and completely reducible, and $n\le2k-1<2p$. The Fermat primes other than $3$ are congruent to $1$ modulo $4$. For $p\ge7$, Theorem~\ref{thm:Dixon} gives $\nu_p(|\Gamma|)\le\lfloor n/p\rfloor\le1$. For $p=3$ and $k\le2$ we have $n\le3$, and the bound is $\lfloor n/2\rfloor+\lfloor n/6\rfloor\le1$. For $p=k=3$ we have $n\le5$, and the bound is $2$. By Lemma~\ref{lem:basic}(2), $p^{\alpha-k}$ divides $|H|$ and $\alpha-k\ge1$.
+\end{proof}
+
+\subsection{Excluding equality in the linear bound}
+
+\begin{theorem}[Strict bound]\label{thm:endpoint}
+Under the Fitting hypothesis,
+\[
+p<2k-1\qquad\text{and}\qquad p\le4a-5 .
+\]
+\end{theorem}
+\begin{proof}
+The second inequality follows from the first: $k\le2a$ gives $p\le4a-2$, and $p\equiv3\pmod4$. By Theorem~\ref{thm:linear} it remains to exclude $p=2k-1$. Assume $p=2k-1$.
+
+\emph{Step 1: $P$ is elementary abelian of rank $p$, and $H$ acts faithfully and irreducibly on it.} By Theorem~\ref{thm:linear}, $p\le n\le2e-1\le2k-1=p$. So $n=p$ and $e=k$. By Lemma~\ref{lem:forms}(3) every admissible $B_\lambda$ is zero, and by Lemma~\ref{lem:forms}(4) $V=0$. So $D=Z$ is elementary abelian of rank $p$, and $\Phi(D)=1$. By Lemma~\ref{thm:rep}, $H$ acts faithfully on the direct sum of the composition factors of the $G$-module $D$. An element $h\in H$ of order $p$ acts nontrivially on some factor $M_1$. The image of $H$ on $M_1$ is irreducible, so it has no nontrivial normal $p$-subgroup, and it contains the image of $h$, of order $p$. By Theorem~\ref{thm:HH}, $\dim M_1\ge p=\dim D$. So $D$ is an irreducible $G$-module, and $P$ centralizes it.
+
+The $D$-orbits have size $p^e=p^k$, so they are the $P$-orbits. On each orbit the image of $D$ is its own centralizer (Lemma~\ref{lem:regular-abelian}), and $P$ centralizes $D$, so the image of $P$ equals that of $D$. Since $P$ embeds in the product of its images, $P$ is elementary abelian, and $\dim P\le2k-1=p$ by Corollary~\ref{lem:rankbound}. So $P=D$. Now $C_G(P)=P$, so $H$ acts faithfully on $P$, and irreducibly.
+
+\emph{Step 2: weight lines.} Put $F_1=F(H)$, a nilpotent group of order prime to $p$. The $\Kb F_1$-module $\bar P=P\otimes\Kb$ is the direct sum of its isotypic components. Let $\varphi$ be the Frobenius map of $\bar P$, which raises the coordinates with respect to a basis of $P$ to the $p$-th power. It commutes with $H$ and permutes the isotypic components of $F_1$, as does $H$. The sum of the components in one orbit of the group generated by $H$ and $\varphi$ is a subspace of $\bar P$ invariant under $\varphi$ and $H$; such a subspace is spanned by its intersection with $P$, which is an $H$-submodule of $P$. By irreducibility there is one orbit. So the components have a common dimension, and their irreducible constituents have a common degree $\delta$ and a common multiplicity; thus $\delta$ divides $\dim\bar P=p$. An irreducible $\Kb F_1$-module is a tensor product of irreducible modules of the Sylow subgroups of $F_1$, and for a Sylow $q$-subgroup the degree is a power of $q$. So $\delta$ is prime to $p$, and $\delta=1$. If there were one component, $F_1$ would act by scalars, so it would be central in $H$, and $H=C_H(F_1)\le F_1$ would have order prime to $p$. So there is more than one component. The number of components times their common dimension is $p$, so there are $p$ components, each of dimension one. We call them \emph{weight lines}.
+
+Let $H_0$ be the kernel of the action of $H$ on the set of weight lines. It is a group of diagonal matrices in a basis of weight vectors, so it is abelian of order prime to $p$. An element of order $p$ of $H$ permutes the $p$ weight lines in a $p$-cycle. So $\bar H=H/H_0$ is a transitive solvable permutation group of prime degree $p$. Such a group has a normal regular subgroup $C$ of order $p$, on which a point stabilizer acts faithfully. So $|\bar H|=pm_0$ with $m_0$ dividing $p-1$, a point stabilizer $M_0$ is cyclic of order $m_0$, and $\nu_p(|H|)=1$.
+
+The permutation of the weight lines induced by $\varphi$ commutes with $\bar H$, so it lies in the centralizer of $C$ in the symmetric group, which is $C$. So $\varphi$ either fixes every weight line or permutes them in a $p$-cycle. In the second case, for $g\in H_0$ with eigenvalue $\gamma_i$ on the $i$-th weight line, the relation $g\varphi=\varphi g$ shows that the eigenvalue on the image of that line under $\varphi$ is $\gamma_i^p$. So all eigenvalues of $g$ are determined by one of them, $g\mapsto\gamma_1$ is an injective homomorphism from $H_0$ to the multiplicative group of $\Kb$, and $H_0$ is cyclic. In the first case each weight line is spanned by a vector of $P$, the eigenvalues lie in $\F_p$, and $H_0$ has exponent dividing $p-1$.
+
+\emph{Step 3: the action on $Y$.} By Lemma~\ref{lem:basic}(2), $|Y|=p^{\alpha-k}s^2$ divides $|H|$ and is divisible by $p$. Since $\nu_p(|H|)=1$, $|Y|=pd$ with $d=s^2$. The orbits of the normal subgroup $H_0$ on $Y$ have a common size, which is prime to $p$. So their number is divisible by $p$. The group $\bar H$ permutes them transitively. The preimage of $M_0$ in $H$ has order prime to $p$. Let $g$ be an element of this preimage that maps to a generator of $M_0$. By Lemma~\ref{lem:basic}(4), $g$ fixes a point $y\in Y$. So $M_0$ fixes the $H_0$-orbit of $y$, and the number of $H_0$-orbits divides $[\bar H:M_0]=p$. So there are $p$ orbits of $H_0$ on $Y$, each of size $d$. On each of them the stabilizer in $H_0$ of a point is the same for all points (Lemma~\ref{lem:regular-abelian}) and has index $d>1$. Every element of $H_0$ fixes a point of $Y$ by Lemma~\ref{lem:basic}(4). So $H_0$ is the union of $p$ subgroups of index $d$, and
+\[
+d<p
+\]
+by Lemma~\ref{lem:cover}. If $H_0$ were cyclic, a generator would lie in one of these proper subgroups. So $\varphi$ fixes every weight line and $H_0$ has exponent dividing $p-1$. Then every prime dividing $d$ divides $|H_0|$, hence divides $p-1$. Now $d$ is an odd square greater than $1$, so $d\ge9$ and $d\equiv1\pmod4$, and $p-d\equiv2\pmod4$. If $p-d=2$, a prime dividing $d$ would divide $p-1=d+1$. So
+\[
+9\le d\le p-6 .
+\]
+Write $p=4m-1$. Then $k=2m$ and $m\ge4$.
+
+\emph{Step 4: types.} For $y\in Y$ let $P_y$ be the stabilizer in $P$ of the vertices of $y$, and $W_y=P_y^\perp\le P^*$, of dimension $k$. We call the distinct subspaces among the $W_y$ \emph{types}, and $N$ is their number. The group $H$ permutes the types transitively. If $N=1$, the single type is an $H$-invariant subspace of $P^*$ of dimension $k$ with $0<k<p$, which contradicts the irreducibility of $H$ on $P^*$. The map sending a vertex to the type of its $P$-orbit is $G$-equivariant, so its fibres form a block system with $N>1$ blocks, and $p$ divides $N$ by the quotient law. Also $N$ divides $|Y|=pd$. Write $N=pl$ with $1\le l\le d$. Each type belongs to $c=pd/N$ of the $P$-orbits, which we call \emph{cells}.
+
+Let $W\ne W'$ be types and $t=\dim(W\cap W')$; then $t\le2m-1$. By Lemma~\ref{lem:rowsum}, an entry of the orbit matrix $Q_P$ between a cell of type $W$ and a cell of type $W'$ is an odd multiple of $p^{k-t}$. By Lemma~\ref{lem:Q} a row of $Q_P$ has squared norm $p^k(pd-1)<p^{k+2}$. If $t<m$, one entry has square at least $p^{2(m+1)}=p^{k+2}$. So
+\[
+m\le t\le2m-1 .
+\]
+
+For a subspace $U\le P^*$ put $\psi(U)=\frac1N\sum_{W'}\dim(U\cap W')-\frac kp\dim U$, the sum being over the types. Since $(U\cap W')+(U'\cap W')\subseteq(U+U')\cap W'$, the dimension formula gives $\psi(U)+\psi(U')\le\psi(U+U')+\psi(U\cap U')$. So the sum of two subspaces maximising $\psi$ maximises $\psi$, and there is a largest maximiser. It is $H$-invariant, because $H$ permutes the types. By irreducibility it is $0$ or $P^*$, and $\psi(0)=\psi(P^*)=0$. So $\psi(U)\le0$ for all $U$. For $U=W$ this reads $k+\sum_{W'\ne W}\dim(W\cap W')\le Nk^2/p=4m^2l$, and subtracting $m(N-1)=m(4m-1)l-m$ gives
+\begin{equation}\label{eq:tsum}
+\sum_{W'\ne W}\bigl(\dim(W\cap W')-m\bigr)\le(l-1)m .
+\end{equation}
+
+Let $R$ be the set of elements of $W$ that lie in no other type. The number of elements of $W$ that lie in another type is at most $\sum_{W'\ne W}p^{t}$, with $t=\dim(W\cap W')$. On the interval $m\le t\le2m-1$ the convex function $p^{t-2m}$ is at most $p^{-m}+\frac{t-m}{m-1}(p^{-1}-p^{-m})$. With~\eqref{eq:tsum},
+\[
+1-\frac{|R|}{p^k}\le(N-1)p^{-m}+\frac{(l-1)m}{m-1}\bigl(p^{-1}-p^{-m}\bigr).
+\]
+The first term is less than $p^{-2}$, because $N\le pd<p^2$ and $m\ge4$. In the second, $l-1\le d-1\le p-7=4(m-2)$, so $(l-1)m/(m-1)\le p-7+4(m-2)/(m-1)<p-3$, and the term is less than $(p-3)/p$. Therefore
+\begin{equation}\label{eq:private}
+\frac{|R|}{p^k}>\frac3p-\frac1{p^2}>\frac1p\ge\frac1N .
+\end{equation}
+
+\emph{Step 5: a norm computation.} Fix a primitive $p$-th root of unity $\omega$ and identify $\mu\in P^*$ with the character $\chi_\mu=\omega^\mu$ of $P$. For a character $\chi$ let $V_\chi$ be the space of functions $f\colon X\to\C$ with $f(gx)=\chi(g)f(x)$ for $g\in P$. These spaces are pairwise orthogonal, they are preserved by $S$, and a function in $V_{\chi_\mu}$ vanishes on every cell $y$ with $\mu\notin W_y$. Let $\Pi$ be the orthogonal projection onto the sum of the $V_{\chi_\mu}$ with $\mu\in R$. Then $\Pi$ commutes with $S$, and every function in the image of $\Pi$ is supported on the union $X_W$ of the $c$ cells of type $W$. Since $0$ lies in every type and $N>1$, $0\notin R$; so the image of $\Pi$ is orthogonal to $\one$, and $\|Sf\|^2=v\|f\|^2$ for $f$ in the image, by Lemma~\ref{lem:S}.
+
+Let $x$ be a vertex in a cell of type $W$ and $\delta_x$ its indicator function. For $\mu\in W$ the projection of $\delta_x$ to $V_{\chi_\mu}$ is the function with value $p^{-k}\chi_\mu(g)$ at $gx$, $g\in P$, and zero outside the cell of $x$; its squared norm is $p^{-k}$. So $\|\Pi\delta_x\|^2=|R|/p^k$, and
+\[
+v\,\frac{|R|}{p^k}=\|S\Pi\delta_x\|^2=\|\Pi S\delta_x\|^2 .
+\]
+For every function $f$, $\Pi f=\Pi(f|_{X_W})$, because a function vanishing on $X_W$ is orthogonal to the image of $\Pi$. The restriction of $S\delta_x$ to $X_W$ has entries $\pm1$ except for one zero entry at $x$, so its squared norm is $cp^k-1$. Since $cp^k=v/N$,
+\[
+v\,\frac{|R|}{p^k}\le\frac vN-1<\frac vN .
+\]
+This contradicts~\eqref{eq:private}.
+\end{proof}
+
+\subsection{The exponent of the distinguished prime}
+
+\begin{theorem}\label{thm:powers}
+Under the Fitting hypothesis, the exponent $\alpha=\nu_p(v)$ satisfies $\alpha\ge9$, and $\alpha=9$ only if $p=3$.
+\end{theorem}
+\begin{proof}
+Let $r$ be the prime of Lemma~\ref{lem:basic}(5), so that $r^2+r+1\le p^{\alpha-k}$. If $p=3$ then $r\ge5$ and $3^{\alpha-k}\ge31$, so $\alpha-k\ge4$. If $p\in\{7,11\}$ then $r\ge3$ and $p^{\alpha-k}\ge13>p$, so $\alpha-k\ge2$.
+
+Let $p\in\{3,7,11\}$ and suppose $k\le p$. By Theorem~\ref{thm:center}, $\alpha-k=1$, or $p=k=3$ and $\alpha-k\le2$. This contradicts the first paragraph. So $k\ge p+1$, and $\alpha\ge k+4\ge8$ for $p=3$, $\alpha\ge k+2\ge10$ for $p=7$, and $\alpha\ge14$ for $p=11$. Since $\alpha$ is odd, $\alpha\ge9$, $11$ and $15$ respectively.
+
+The remaining primes congruent to $3$ modulo $4$ are at least $19$. For them Theorem~\ref{thm:endpoint} gives $p\le4a-5=2\alpha-7$, so $\alpha\ge13$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:C}]
+Let $G$ be a transitive group of automorphisms. Since $s$ is squarefree, the Fitting hypothesis holds by Corollary~\ref{cor:fitting}. Part~(1) is Theorem~\ref{thm:powers} with $\alpha=2a+1$, and part~(2) is Theorem~\ref{thm:endpoint}.
+\end{proof}
+
+\section{Finiteness}\label{sec:finite}
+
+In this section $G\le\Aut(T)$ is transitive, and no hypothesis is made on the Fitting subgroup. We first restrict the primes $p$ for which a prime $r\ne p$ can divide $|F(G)|$.
+
+\begin{theorem}[Gate]\label{thm:gate}
+Let $r\ne p$ be a prime with $r^{2k}\parallel v$, $k\ge1$, and suppose $O_r(G)\ne1$. Let $Z\le O_r(G)$ be a minimal normal subgroup of $G$, let $n=\dim Z$, and let $N$ be the number of distinct subgroups of $Z$ that are stabilizers of $Z$-orbits. Then the $Z$-orbits have size $r^{2j}$ for an integer $j$, and:
+\begin{enumerate}
+\item $1\le j\le k$;
+\item $2j+1\le n\le4j-1$;
+\item $p$ divides $N$, $N>r^{2j}$, and $N$ divides $v/r^{2j}$;
+\item $N$ divides $|\GL(n,r)|$;
+\item $N\,(r^{n-2j}-1)\ge r^n-1$;
+\item if $j=1$, then $n=3$ and $N=r^2+r+1$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+$Z$ is an elementary abelian $r$-group, and its orbits have a common size $r^c$ with $c\ge1$. By Lemma~\ref{lem:disc}, $c$ is even, and $c\le2k$. This gives $j$ and (1). The stabilizers of the $Z$-orbits have index $r^{2j}$ in $Z$, and they cover $Z$ by the fixed-point law. A trivial subgroup does not cover $Z$, so $n\ge2j+1$; and $n\le4j-1$ by Corollary~\ref{lem:rankbound}. This is (2).
+
+The group $G$ permutes the $N$ stabilizers transitively by conjugation, and $C_G(Z)$ fixes each of them. So $N$ is the index of a subgroup of $\Gamma=G/C_G(Z)$, and $\Gamma$ embeds in $\GL(Z)\cong\GL(n,r)$. This is (4). The sets of vertices with a given stabilizer in $Z$ form a block system of $G$ with $N$ blocks. If $N=1$, the single stabilizer is the intersection of all stabilizers, which is trivial, and does not cover $Z$. So $N>1$ and $p\mid N$ by the quotient law. Lemma~\ref{lem:cover} gives $N>r^{2j}$. Each stabilizer occurs on the same number of $Z$-orbits, so $N$ divides $v/r^{2j}$. This is (3). The $N$ stabilizers contain $N(r^{n-2j}-1)$ non-identity elements, counted with repetition, and cover the $r^n-1$ non-identity elements of $Z$. This is (5). Finally (6) is Proposition~\ref{prop:r-structure}.
+\end{proof}
+
+Let $r\ne p$ be a prime with $r^{2k}\parallel v$. A \emph{gate witness} for $(v,p,r)$ is a triple of integers $(j,n,N)$ that satisfies conditions (1)--(6) of Theorem~\ref{thm:gate}. Whether one exists is a finite arithmetic question.
+
+\begin{corollary}\label{cor:ord}
+Let $r\ne p$ be a prime with $r^{2k}\parallel v$. If $O_r(G)\ne1$, then $p$ divides $r^i-1$ for some $1\le i\le4k-1$. Equivalently, if the multiplicative order $\operatorname{ord}_p(r)$ of $r$ modulo $p$ is at least $4k$, then $O_r(G)=1$.
+\end{corollary}
+\begin{proof}
+By Theorem~\ref{thm:gate}, $p$ divides $N$, which divides $|\GL(n,r)|=r^{n(n-1)/2}\prod_{i=1}^n(r^i-1)$ with $n\le4j-1\le4k-1$.
+\end{proof}
+
+Every mixed order has a unique expression $v=p^{2a+1}(Mu)^2$, where $p$ is the distinguished prime, $u$ is squarefree, every prime dividing $M$ divides it at least twice, and $M$, $u$ and $p$ are pairwise coprime: $M$ is the product of the prime powers $r^h\parallel s$ with $h\ge2$, and $u$ is the product of the primes that divide $s$ exactly once.
+
+\begin{theorem}[Fixed part]\label{thm:fixedpart}
+Fix an integer $a\ge0$ and an odd integer $M\ge1$ such that every prime dividing $M$ divides it at least twice. Put
+\[
+B_M=\prod_{r^h\parallel M}\ \prod_{i=1}^{4h-1}(r^i-1),
+\]
+the outer product being over the primes $r$ dividing $M$, with $B_1=1$. Suppose a vertex-transitive Hadamard tournament has order $v=p^{2a+1}(Mu)^2$, where $p\equiv3\pmod4$ is prime, $u$ is squarefree, $M$, $u$ and $p$ are pairwise coprime, and $Mu>1$. Then:
+\begin{enumerate}
+\item $p\le4a-1$ or $p$ divides $B_M$;
+\item $v\le N!$, where $N=p^{(2a+1)(4a+1)}\prod_{r^h\parallel M}r^{2h(4h-1)}$.
+\end{enumerate}
+Consequently, for fixed $a$ and $M$ only finitely many such orders $v$ exist, as $p$ and $u$ vary.
+\end{theorem}
+\begin{proof}
+Let $G$ be a transitive group of automorphisms. If $O_\ell(G)\ne1$ for a prime $\ell$, then $\ell$ divides $v$ (Section~\ref{sec:prelim}). If $\ell$ divides $u$, then $\ell^2\parallel v$ and $O_\ell(G)=1$ by Proposition~\ref{prop:plane}. So $F(G)$ is the product of $O_p(G)$ and the groups $O_r(G)$ for the primes $r$ dividing $M$.
+
+(1) Suppose $O_r(G)\ne1$ for a prime $r$ with $r^h\parallel M$. Then $r^{2h}\parallel v$, and by Corollary~\ref{cor:ord} $p$ divides $r^i-1$ for some $i\le4h-1$. So $p$ divides $B_M$. Otherwise $F(G)$ is a $p$-group. The order is mixed because $Mu>1$, so the Fitting hypothesis of Section~\ref{sec:linear} holds and $p\le4a-1$ by Theorem~\ref{thm:linear}.
+
+(2) Let $\ell$ be $p$ or a prime dividing $M$, and $t_\ell=\nu_\ell(v)$; so $t_p=2a+1$ and $t_r=2h$ for $r^h\parallel M$. The orbits of $O_\ell(G)$ have a common size, which is a power of $\ell$ dividing $v$, so it is at most $\ell^{t_\ell}$. By Lemma~\ref{lem:orderbound}, $|O_\ell(G)|\le\ell^{t_\ell(2t_\ell-1)}$. Hence $|F(G)|\le N$. Since $G$ is solvable, $C_G(F(G))\le F(G)$, and $G/C_G(F(G))$ embeds in the automorphism group of $F(G)$, which acts faithfully on the $|F(G)|-1$ non-identity elements. So
+\[
+v\le|G|\le|F(G)|\cdot(|F(G)|-1)!=|F(G)|!\le N! .
+\]
+
+By (1) the prime $p$ lies in a finite set that depends only on $a$ and $M$, and by (2) the order $v$ is then bounded in terms of $p$, $a$ and $M$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:A}]
+For an integer $v$ put $d=\prod_\ell\ell^{\lfloor\nu_\ell(v)/4\rfloor}$, the product being over the primes. Then $d^4$ is the largest fourth-power divisor of $v$. If $d^4\le B$, then $d$ is one of finitely many integers. Fix $d$, and let $v$ be the order of a vertex-transitive Hadamard tournament that is not a prime power and has this $d$. By Proposition~\ref{prop:laws}(1), $v$ is mixed; write $v=p^{2a+1}(Mu)^2$ as at the beginning of this section, with $Mu>1$.
+
+We have $2a+1\le4\nu_p(d)+3$. If $p\nmid d$ this gives $a\le1$. If $p\mid d$, then $p$ is one of the finitely many primes dividing $d$. So $a$ takes finitely many values. If $r^h\parallel M$, then $\nu_r(v)=2h\ge4$, so $r$ divides $d$ and $2h\le4\nu_r(d)+3$. So $M$ takes finitely many values. For each pair $(a,M)$, Theorem~\ref{thm:fixedpart} leaves finitely many orders.
+\end{proof}
+
+\section{Application: orders below \texorpdfstring{$10^5$}{100000}}\label{sec:census}
+
+Theorem~\ref{thm:main} follows from Ito's Theorem~1, Theorems~\ref{thm:fourthfree} and~\ref{thm:C}, and three exclusions proved in the Appendix: the prefix bound (Proposition~\ref{prop:prefix}), which iterates the chief-step bound; Proposition~\ref{thm:fittingclass}, which combines Theorem~\ref{thm:gate} with Propositions~\ref{prop:plane} and~\ref{prop:endgame}; and Theorem~\ref{thm:pr4} on the orders $pr^4$.
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Prime powers $v\equiv3\pmod4$ carry Paley tournaments, and a Hadamard tournament has order $v\equiv3\pmod4$. For the other $v\equiv3\pmod4$, apply the following tests in the order listed and assign $v$ to the first that applies. The last column counts the orders assigned, among the $25000$ integers $v\equiv3\pmod4$ with $3\le v<10^5$. In rows 4 to 7, $v=p^{2a+1}\prod_ir_i^{2k_i}$ with $p$ the unique prime of odd exponent and $r_1<r_2<\cdots$ the other primes.
+
+\begin{center}
+\begin{tabular}{rlr}
+\toprule
+& Test & Orders \\
+\midrule
+1 & $v$ is a prime power (Paley tournament exists) & 4819 \\
+2 & Proposition~\ref{prop:laws}(1), Ito: $v$ is not $pt^2$ with $p$ prime & 18388 \\
+3 & Theorem~\ref{thm:fourthfree}: $v$ is fourth-power-free & 1622 \\
+4 & Theorem~\ref{thm:C}: all $k_i=1$, and (1) or (2) fails & 7 \\
+5 & Proposition~\ref{prop:prefix}: some $r_i^2+r_i+1\le p^{2a+1}\prod_{j<i}r_j^{2k_j}$ fails & 29 \\
+6 & Proposition~\ref{thm:fittingclass}: $a\le1$, and $k_i=1$ or no gate witness for each $i$ & 134 \\
+7 & Theorem~\ref{thm:pr4}: $v=pr^4$, $p<r^4$ & 1 \\
+\midrule
+& Not assigned & 0 \\
+& Total & 25000 \\
+\bottomrule
+\end{tabular}
+\end{center}
+Every order that is not a prime power is assigned to one of the rows 2 to 7, and each of these rows is a theorem excluding the orders assigned to it.
+\end{proof}
+
+The counts depend on the order of the tests. Below $10^5$ every mixed order with squarefree cofactor has $a\le3$, because $3^9\cdot5^2>10^5$; so rows 3 and 4 contain all of them, by Theorem~\ref{thm:C}(1). The seven orders in row~4 are $3^5s^2$ with $s\in\{5,7,11,13,17,19\}$ and $54675=3^7\cdot5^2$. The order in row~7 is $19375=31\cdot5^4$, where $31=5^2+5+1$. Row~6 contains, for example, $27783=3^4\cdot7^3$: a gate witness for the prime $3$ needs $7\mid N$, $N\mid343$ and $N>81$, so $N=343$ and $j=2$; but $7^2$ does not divide $|\GL(n,3)|$ for $n\le7$, because $3$ has order $6$ modulo $7$ and $7^2\nmid3^6-1$.
+
+Rows 2, 3, 5, 6 and 7 use none of the three theorems quoted in Section~\ref{sec:linear}. Row~4 uses the quoted Theorems~\ref{thm:HH}, \ref{thm:AS} and~\ref{thm:Dixon}, through Theorem~\ref{thm:center}.
+
+The counts were produced by the following script, \texttt{code/census.py} in the release repository, in exact integer arithmetic. It runs in less than one second with Python~3 and needs no external packages. It prints the list of orders not assigned, which is empty, and then the row counts. The function \texttt{witness} searches for a gate witness $(j,n,N)$ as defined after Theorem~\ref{thm:gate}.
+
+{\footnotesize\verbatiminput{../code/census.py}}
+
+\section{What remains}\label{sec:conj}
+
+Ito's question is open: we know no vertex-transitive Hadamard tournament whose order is not a prime power, and no proof that there is none. Ito did not state it as a conjecture; he described it as a ``further possibility'' \cite[p.~41]{Ito84}. The results above leave the following.
+\begin{itemize}
+\item \emph{Squarefree cofactor.} For $v=p^{2a+1}s^2$ with $s>1$ squarefree, the first exponent of $p$ that Theorem~\ref{thm:C} does not exclude is $9$, and there only $p=3$ remains: the orders $3^9s^2$, the smallest being $492075=3^9\cdot5^2$. The proof of Theorem~\ref{thm:powers} gives $k\ge4$ for them, so Theorem~\ref{thm:center}, which needs $k\le p$, does not apply.
+\item \emph{The finite sets of Theorem~\ref{thm:A}.} The largest fourth-power divisor of an odd integer is $1$ or at least $81$. So for $B<81$ the finite set is empty, by Theorem~\ref{thm:fourthfree}. For $B\ge81$ we have not shown that it is empty. The bound $N!$ of Theorem~\ref{thm:fixedpart} can be computed for each $B$, but it is far from the truth and is not uniform in $B$.
+\item \emph{A second prime in the Fitting subgroup.} Section~\ref{sec:linear} assumes that $F(G)$ is a $p$-group.
+\end{itemize}
+
+\begin{conjecture}[C1]\label{conj:fitting}
+If $G$ is a transitive group of automorphisms of a Hadamard tournament of order $pt^2$, with $p$ the distinguished prime, then the Fitting subgroup of $G$ is a $p$-group.
+\end{conjecture}
+
+By Proposition~\ref{thm:fittingclass}, Conjecture~\ref{conj:fitting} holds whenever every prime $r\ne p$ dividing $v$ either divides $v$ exactly twice or has no gate witness for $(v,p,r)$; by Corollary~\ref{cor:ord} this includes every order with $\operatorname{ord}_p(r)\ge2\nu_r(v)$ for each prime $r\ne p$ such that $r^4\mid v$. The conjecture follows from a positive answer to Ito's question: if $v$ is a power of $p$, the orbits of $O_r(G)$, $r\ne p$, have $r$-power size dividing $v$, so they are points. It would make Theorems~\ref{thm:powers} and~\ref{thm:endpoint} hold for every mixed order.
+
+The case that our methods do not reach is a normal $r$-subgroup of $G$, $r\ne p$, whose orbits have size $r^{2u}$, under a large $p$-part of $v$. Each exclusion of a normal $r$-subgroup above, such as Proposition~\ref{prop:plane} and the gate (Theorem~\ref{thm:gate}), uses the identity $S^2=J-vI$ on one orbit or one fibre at a time. To treat the remaining case one has to carry that identity across the quotient by the $r$-subgroup. We tried three ways of doing so, and none works in general: restriction to the fixed set of an $r$-element, which we cannot show induces a Hadamard tournament; the affine-plane argument of Proposition~\ref{prop:plane} for orbits of size $r^{2u}$ with $u\ge2$; and a Brauer-quotient form of the trace lemma, whose induced pairing degenerates. A proof of Conjecture~\ref{conj:fitting} will need an invariant that survives this quotient.
+
+\begin{question}\label{q:cayley}
+Is every vertex-transitive Hadamard tournament a Cayley tournament?
+\end{question}
+
+By Proposition~\ref{prop:laws}(4) a positive answer would settle Ito's question, and Corollary~\ref{cor:cayley} gives it for fourth-power-free orders. Javier, Llano and Zuazua write that ``there exist vertex-transitive (regular and doubly regular) tournaments which are non-Cayley tournaments (and so, non-Paley)'' \cite[p.~74]{JLZ}, with a reference to Mansilla~\cite{Mansilla}. None of the tournaments constructed in~\cite{Mansilla} is doubly regular, as we now show, and we know of no non-Cayley vertex-transitive Hadamard tournament. We still pose a question and not a conjecture.
+
+\begin{proposition}\label{prop:metacirculant}
+Let $p$ be a prime and $k\ge5$. No Hadamard tournament of order $p^k$ has an automorphism with $p$ cycles of length $p^{k-1}$.
+\end{proposition}
+\begin{proof}
+Suppose $\sigma$ is such an automorphism of a Hadamard tournament with signed matrix $S$. Then $p^k\equiv3\pmod4$, so $p\equiv3\pmod4$ and $k$ is odd. Put $n=p^{k-1}$ and let $\zeta$ be a primitive $n$-th root of unity. Choose a vertex $x_i$ in the $i$-th cycle and let $e_i=\sum_{j=0}^{n-1}\zeta^j\delta_{\sigma^jx_i}$, where $\delta_y$ is the indicator of $y$. The $e_i$ span an eigenspace $E$ of $P_\sigma$ of dimension $p$, orthogonal to $\one$. Since $S$ commutes with $P_\sigma$, it preserves $E$, and $S^2=-p^k$ on $E$ by Lemma~\ref{lem:S}. The eigenvalues of $S$ on $E$ are $\pm p^{(k-1)/2}\sqrt{-p}$ with multiplicities $m_+$ and $m_-$, and $m_++m_-=p$ is odd. So
+\[
+\tr(S|_E)=h\,p^{(k-1)/2}\sqrt{-p}\qquad\text{with } h=m_+-m_-\ \text{odd}.
+\]
+In the basis $e_i$, the diagonal coefficient of $S$ at $e_i$ is $(Se_i)(x_i)=\sum_jS[x_i,\sigma^jx_i]\zeta^j$. So $\tr(S|_E)=F(\zeta)$, where $F(X)=\sum_{j=0}^{n-1}f_jX^j$ and $f_j=\sum_{i=1}^pS[x_i,\sigma^jx_i]$. The $f_j$ are integers with $|f_j|\le p$.
+
+Put $d=n/p$, so that $\zeta^d$ is a primitive $p$-th root of unity. The quadratic Gauss sum gives $\sqrt{-p}=\pm\Gamma(\zeta)$ with $\Gamma(X)=\sum_{a=1}^{p-1}\bigl(\frac ap\bigr)X^{ad}$. Replacing $h$ by $-h$ if necessary, the polynomial $F-h\,p^{(k-1)/2}\Gamma\in\Z[X]$ vanishes at $\zeta$. So it is divisible in $\Z[X]$ by the cyclotomic polynomial $\Phi_n(X)=\sum_{a=0}^{p-1}X^{ad}$. Its degree is less than $n=pd$, so the quotient has degree less than $d$, and therefore its coefficients at $X^0,X^d,\dots,X^{(p-1)d}$ are all equal to the constant term of the quotient. For a square $a$ and a non-square $a'$ modulo $p$ this gives $f_{ad}-h\,p^{(k-1)/2}=f_{a'd}+h\,p^{(k-1)/2}$, hence
+\[
+2|h|\,p^{(k-1)/2}=|f_{ad}-f_{a'd}|\le2p .
+\]
+So $(k-1)/2\le1$, contrary to $k\ge5$.
+\end{proof}
+
+Mansilla's tournaments are of two kinds. The first are the metacirculants $T(p^{k},p,\alpha)$ of order $p^{k+1}$, $k\ge3$ \cite[Section~4, Theorem~9]{Mansilla}. Their vertices are $v^i_j$ with $i\in\Z_p$ and $j\in\Z_{p^k}$, and the rotation $v^i_j\mapsto v^i_{j+1}$ is an automorphism \cite[Proposition~6]{Mansilla} with $p$ cycles of length $p^k$. The order $p^{k+1}$ is congruent to $3$ modulo $4$ only if $k+1$ is odd, so $k+1\ge5$, and Proposition~\ref{prop:metacirculant} applies. The second kind \cite[Theorem~14 and the remark after its proof]{Mansilla} are lexicographic products of a regular tournament on $a\ge3$ vertices, built from Paley tournaments, with a tournament of the first kind on $b\ge81$ vertices. In a lexicographic product, two vertices of one fibre beat every vertex of the $(a-1)/2$ fibres that their fibre beats, so they have at least $b(a-1)/2>(ab-3)/4$ common out-neighbours, and the product is not doubly regular.
+
+\begin{remark}[Order $p^3$]\label{rem:p3}
+Corollary~\ref{cor:cubefree} does not extend to order $p^3$. An isomorphism of Cayley tournaments is an isomorphism of the designs whose blocks are the translates of the difference sets. Feng~\cite[Theorem~1 and Section~5]{Feng} constructed skew Hadamard difference sets in the nonabelian group of order $p^3$ and exponent $p$ whose designs are not isomorphic to the Paley design, for every prime $p>3$ with $p\equiv3\pmod4$. Muzychuk~\cite[Section~6, p.~8]{Muzychuk} constructed $4\binom{q}{(q+1)/2}$ skew Hadamard difference sets in the elementary abelian group of order $q^3$, for prime powers $q=p^n\equiv3\pmod4$, which give at least $4\binom{q}{(q+1)/2}/(2n(q-1)q)$ pairwise non-isomorphic designs. At order $27$ the Paley tournament is the only vertex-transitive Hadamard tournament up to isomorphism: among the $457$ circulant and $237$ non-circulant entries of order $27$ and out-degree $13$ in McKay's catalogue of vertex-transitive digraphs~\cite{McKay}, exactly one has six common out-neighbours for every pair of distinct vertices. It is entry~222 of the non-circulant file, counting from one. So $343$ is the smallest cube of a prime at which a non-Paley vertex-transitive Hadamard tournament exists.
+\end{remark}
+
+
+\appendix
+\section{Three exclusions used only in the census}\label{sec:appendix}
+
+In this appendix $G\le\Aut(T)$ is transitive and $p$ is the distinguished prime.
+
+\subsection{The prefix bound}
+\begin{proposition}\label{prop:prefix}
+Let $p$ be the distinguished prime of a vertex-transitive Hadamard tournament of order $v=p^{2a+1}\prod_{j=1}^mr_j^{2e_j}$, where $r_1<\dots<r_m$ are the other primes dividing $v$ and $e_j\ge1$. Then
+\[
+r_i^2+r_i+1\le p^{2a+1}\prod_{j<i}r_j^{2e_j}\qquad(1\le i\le m).
+\]
+\end{proposition}
+\begin{proof}
+Take a chief series of a transitive group $G$ and fix $i$. Call a step $N_{j-1}<N_j$ a \emph{tail step} if $b_{N_{j-1}}>b_{N_j}$ and its characteristic is one of $r_i,\dots,r_m$. The product of the ratios $b_{N_{j-1}}/b_{N_j}$ over all steps is $v$, and each ratio is a power of the characteristic of the step. Since $r_i\mid v$, there is a tail step; let $L<K$ be the last one, with characteristic $q$. After it, every ratio is a power of a prime outside $\{r_i,\dots,r_m\}$, and the product of these ratios is $b_K$. Since $b_K$ divides $v$, it divides $p^{2a+1}\prod_{j<i}r_j^{2e_j}$. By Proposition~\ref{prop:chiefbound},
+\[
+r_i^2+r_i+1\le q^2+q+1\le b_K\le p^{2a+1}\prod_{j<i}r_j^{2e_j}.\qedhere
+\]
+\end{proof}
+
+\subsection{Orders with no gate witness}
+\begin{proposition}\label{thm:fittingclass}
+Let $T$ be a Hadamard tournament of order $v=p^{2a+1}\prod_ir_i^{2k_i}$ with a transitive group $G$ of automorphisms, where $p$ is the distinguished prime, the $r_i$ are the other primes dividing $v$, and $k_i\ge1$. Suppose that for every $i$
+\[
+k_i=1\qquad\text{or}\qquad\text{there is no gate witness for }(v,p,r_i).
+\]
+Then $F(G)$ is a $p$-group. If in addition $a\le1$, then $v=p^{2a+1}$.
+\end{proposition}
+\begin{proof}
+A nontrivial $O_\ell(G)$ has $\ell\mid v$. If $k_i=1$, then $O_{r_i}(G)=1$ by Proposition~\ref{prop:plane}. If there is no gate witness, then $O_{r_i}(G)=1$ by Theorem~\ref{thm:gate}. So $F(G)=O_p(G)$. If $v\ne p^{2a+1}$, Proposition~\ref{prop:endgame} gives $a\ge2$.
+\end{proof}
+
+By Corollary~\ref{cor:ord}, the hypothesis holds for $r_i$ whenever $\operatorname{ord}_p(r_i)\ge4k_i$, where $\operatorname{ord}_p(r)$ is the multiplicative order of $r$ modulo $p$.
+
+\subsection{Orders \texorpdfstring{$pr^4$}{p r\^{}4}}
+Here $r\ne p$ is an odd prime dividing $v$.
+
+\begin{lemma}[Sylow reduction]\label{lem:sylow}
+Let $K$ be a normal subgroup of $G$ whose orbits have size $r^c$ with $c\ge1$. Let $R$ be a Sylow $r$-subgroup of $K$, and put $G_1=N_G(R)$ and $U=\Omega_1(Z(R))$. Then:
+\begin{enumerate}
+\item $R$ is transitive on each $K$-orbit, and $G_1$ is transitive on $X$;
+\item $U$ is a nontrivial elementary abelian $r$-group, normal in $G_1$, and all vertices of a $K$-orbit have the same stabilizer in $U$;
+\item the $U$-orbits have a common size $r^d$, where $d\ge2$ is even and $r^d<b_K$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(1) Let $x\in X$. The stabilizer $R_x$ is an $r$-subgroup of $K_x$, so $[R:R_x]$ is at least the largest power of $r$ dividing $[K:K_x]=r^c$. So the $R$-orbit of $x$ has at least $r^c$ elements, and it lies in the $K$-orbit of $x$. Hence $R$ is transitive on each $K$-orbit. All Sylow $r$-subgroups of $K$ are conjugate in $K$, so $G=KG_1$ (the Frattini argument). Since $K$ maps each $K$-orbit to itself, $G_1$ permutes the $K$-orbits transitively, and it contains $R$. So $G_1$ is transitive on $X$.
+
+(2) $R\ne1$ because $r$ divides $|K|$, so $U\ne1$. It is characteristic in $R$, hence normal in $G_1$. For $t\in R$ the stabilizer of $tx$ in $U$ is $tU_xt^{-1}=U_x$, because $R$ centralizes $U$; and $R$ is transitive on the $K$-orbit of $x$.
+
+(3) The orbits of $U$ have a common size $r^d$ because $U$ is normal in the transitive group $G_1$, and $d>0$ because $U$ acts faithfully. By Lemma~\ref{lem:disc}, $\nu_r(v/r^d)$ is even, and $\nu_r(v)$ is even, so $d$ is even. Every element of $U$ fixes a vertex by the fixed-point law. By (2) the stabilizers in $U$ of the vertices are at most $b_K$ subgroups of index $r^d$, and they cover $U$. So $b_K>r^d$ by Lemma~\ref{lem:cover}.
+\end{proof}
+
+\begin{lemma}\label{lem:lastr}
+Suppose $v=p^{2a+1}r^{2e}$ with $a\ge0$ and $e\ge1$. Then $G$ has a normal subgroup $K$ such that $b_K$ is a power of $p$ and $b_K\ge r^2+r+1$.
+\end{lemma}
+\begin{proof}
+In a chief series of $G$, the ratios $b_{N_{j-1}}/b_{N_j}$ have product $v$, and each is a power of the characteristic of its step. Since $r\mid v$, some step of characteristic $r$ has ratio greater than $1$. Let $L<K$ be the last such step. All later ratios are powers of $p$, and their product is $b_K$. The inequality is Proposition~\ref{prop:chiefbound}.
+\end{proof}
+
+\begin{lemma}[Fixed plane]\label{lem:fixedplane}
+Let $r$ be an odd prime such that $p=r^2+r+1$ is a prime congruent to $3$ modulo $4$, let $e\ge1$, and suppose $v=pr^{2e}$. Then there are a normal subgroup $K$ of $G$ and a Sylow $r$-subgroup $R$ of $K$ with the following properties, where $G_1=N_G(R)$ and $U=\Omega_1(Z(R))$.
+\begin{enumerate}
+\item $K$ has $p$ orbits $\Delta_1,\dots,\Delta_p$, of size $r^{2e}$. $R$ is transitive on each of them, and $G_1$ is transitive on $X$.
+\item $U\cong C_r^3$, and the $U$-orbits have size $r^2$. The stabilizer in $U$ of the vertices of $\Delta_i$ is a subgroup $L_i$ of order $r$, and $L_1,\dots,L_p$ are the $p$ distinct subgroups of order $r$ of $U$.
+\item For every vertex $x$, the set of vertices fixed by $H=R_x$ is the orbit $Ux$. It has $r^2$ elements.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+The distinguished prime is $p$.
+
+(1) Let $K$ be as in Lemma~\ref{lem:lastr}. Then $b_K$ is a power of $p$ dividing $v$, and $b_K>1$. So $b_K=p$. The rest is Lemma~\ref{lem:sylow}(1).
+
+(2) By Lemma~\ref{lem:sylow}(3) the $U$-orbits have size $r^d$ with $d\ge2$ even and $r^d<p<r^3$. So $d=2$. By Proposition~\ref{prop:r-structure}, applied to $G_1$ and $U$, $U\cong C_r^3$ and every subgroup of order $r$ of $U$ is the stabilizer of some $U$-orbit. By Lemma~\ref{lem:sylow}(2) the stabilizer is the same on all of $\Delta_i$. There are $p$ blocks $\Delta_i$ and $p=r^2+r+1$ subgroups of order $r$, so each occurs for exactly one block.
+
+(3) Let $x\in\Delta_i$ and $H=R_x$. Then $L_i=U_x\le H$. A non-identity element of $L_i$ fixes no vertex of $\Delta_j$ for $j\ne i$, because $L_i\cap L_j=1$. So all vertices fixed by $H$ lie in $\Delta_i$. Since $R$ is transitive on $\Delta_i$, the vertex $gx$ ($g\in R$) is fixed by $H$ if and only if $H\le gHg^{-1}$, that is, $g\in N_R(H)$. So $H$ fixes exactly $n=[N_R(H):H]$ vertices, and $n$ is a power of $r$. For $u\in U$ and $h\in H$ we have $hux=uhx=ux$, so $H$ fixes the $r^2$ vertices of $Ux$, and $n\ge r^2$.
+
+The group $G_1$ is transitive on $X$ and normalizes $R$, so the stabilizers $R_y$, $y\in X$, are conjugate under $G_1$. They all have order $|H|$ and the same number $n$. In each block the number of distinct subgroups $R_y$ is $[R:N_R(H)]=|R|/(n|H|)$. Every element of $R$ fixes a vertex by the fixed-point law. So $R$ is the union of at most $p|R|/(n|H|)$ subgroups of order $|H|$, and $|R|\le p|R|/n$. Thus $r^2\le n\le p<r^3$, and $n=r^2$. So the set of vertices fixed by $H$ is $Ux$.
+\end{proof}
+
+\begin{theorem}\label{thm:pr4}
+Let $p\ne r$ be odd primes with $p\equiv3\pmod4$ and $p<r^4$. There is no vertex-transitive Hadamard tournament of order $pr^4$.
+\end{theorem}
+\begin{proof}
+Suppose $G$ is a transitive group of automorphisms of such a tournament. The distinguished prime is $p$.
+
+\emph{The case $p\ne r^2+r+1$.} We show that there is no gate witness $(j,n,N)$ for $(v,p,r)$. Then Proposition~\ref{thm:fittingclass}, with $a=0$, gives $v=p$, which is false. Since $r^4\parallel v$, a witness has $j\in\{1,2\}$. If $j=1$, then $N=r^2+r+1$ by condition~(6), and by condition~(3) $N$ is divisible by $p$ and divides $v/r^2=pr^2$. Since $N$ is prime to $r$, this gives $N=p$, contrary to the assumption. If $j=2$, then by condition~(3) $N$ divides $v/r^4=p$ and $N>r^4>p$, which is impossible.
+
+\emph{The case $p=r^2+r+1$.} Let $K$, $R$, $G_1$, $U$, $\Delta_i$ and $L_i$ be as in Lemma~\ref{lem:fixedplane} with $e=2$. We call the $U$-orbits \emph{cells}. There are $b=pr^2$ cells, of size $r^2$, and each block $\Delta_i$ consists of $r^2$ cells. Let $Q=Q_U$. We show that every off-diagonal entry of $Q$ is divisible by $r$.
+
+Let $O\subseteq\Delta_i$ and $O'\subseteq\Delta_j$ be cells with $i\ne j$. Their stabilizers in $U$ are $L_i\ne L_j$, and $[L_iL_j:L_j]=r$. By Lemma~\ref{lem:rowsum}, $Q[O,O']$ is an odd multiple of $r$.
+
+Now let $O\ne O'$ be cells in the same block $\Delta_i$. The group $R$ permutes the cells. Let $R_0$ be the kernel of this action and $E=R/R_0$. Since $R$ is transitive on $\Delta_i$, $E$ is transitive on the $r^2$ cells of $\Delta_i$, and $E\ne1$. Let $\hat Z$ be the preimage in $R$ of $\Omega_1(Z(E))\ne1$. It contains $U$, and it is normal in $G_1$, because $R_0$ is the intersection of $R$ with the kernel of $G_1$ on the cells. Its orbits are unions of cells within one block, of a common size $r^{2+c}$ with $0\le c\le2$. By Lemma~\ref{lem:disc}, applied to $G_1$ and $\hat Z$, $c$ is even. If $c=0$, then $\hat Z$ maps every cell to itself, so $\hat Z\le R_0$, which is false. So $c=2$: the abelian group $\Omega_1(Z(E))$ is transitive on the cells of $\Delta_i$. By Lemma~\ref{lem:regular-abelian} its image in the symmetric group on these cells is regular and is its own centralizer. Since $E$ centralizes it, $E$ acts on the cells of $\Delta_i$ as a regular group.
+
+Let $x\in O$ and $H=R_x$. Then $H$ maps $O$ to itself, so by regularity $H$ maps every cell of $\Delta_i$ to itself. By Lemma~\ref{lem:fixedplane}(3), $H$ fixes no vertex of $O'$. So the orbits of the $r$-group $H$ on $O'$ have sizes divisible by $r$. The function $y\mapsto S[x,y]$ is constant on them, because $S[x,hy]=S[hx,hy]=S[x,y]$ for $h\in H$. Hence $r$ divides $Q[O,O']$.
+
+By Lemma~\ref{lem:Q} the off-diagonal entries of $Q$ are odd, each row has $b-1$ of them, and the squared norm of a row is $r^2(b-1)$. Since each entry is an odd multiple of $r$, each is $\pm r$. Put $S'=Q/r$. It is skew with zero diagonal and off-diagonal entries $\pm1$, and $S'S'^{T}=(v/r^2)I-J=bI-J$ by Lemma~\ref{lem:Q}. By the converse part of Lemma~\ref{lem:S} it is the signed matrix of a Hadamard tournament of order $b=pr^2$. The group $G_1$ permutes the cells transitively and preserves $Q$. So this tournament is vertex-transitive. Its order is fourth-power-free and is neither a prime nor the cube of a prime, contrary to Theorem~\ref{thm:fourthfree}.
+\end{proof}
+
+\section*{Role of AI}
+AI assisted the derivations, the computer verification, the literature search and the exposition under the author's direction. Process-separated AI reviews checked the proofs and certificates; they are not independent expert peer review, and no independent human expert has examined the proofs. The release repository records the sources, the reviews and their dispositions.
+
+\begin{thebibliography}{99}
+\bibitem{AS} M.~Aschbacher and S.~D.~Smith, \emph{The Classification of Quasithin Groups. I. Structure of Strongly Quasithin $\mathcal{K}$-groups}, Math. Surveys Monogr. \textbf{111}, Amer. Math. Soc., Providence, 2004.
+\bibitem{Berggren} J.~L.~Berggren, An algebraic characterization of finite symmetric tournaments, \emph{Bull. Austral. Math. Soc.} \textbf{6} (1972), 53--59. doi:10.1017/S0004972700044257.
+\bibitem{Dixon} J.~D.~Dixon, Normal $p$-subgroups of solvable linear groups, \emph{J. Austral. Math. Soc.} \textbf{7} (1967), 545--551. doi:10.1017/S1446788700004481.
+\bibitem{FT63} W.~Feit and J.~G.~Thompson, Solvability of groups of odd order, \emph{Pacific J. Math.} \textbf{13} (1963), 775--1029.
+\bibitem{Feng} T.~Feng, Non-abelian skew Hadamard difference sets fixed by a prescribed automorphism, \emph{J. Combin. Theory Ser. A} \textbf{118} (2011), 27--36. doi:10.1016/j.jcta.2009.11.004.
+\bibitem{Garcia} V.~Araujo Garcia, On the non-existence of skew-Hadamard difference sets in certain non-abelian groups, \emph{Australas. J. Combin.} \textbf{95} (2026), no.~2, 248--256. arXiv:2606.13536.
+\bibitem{Gorenstein} D.~Gorenstein, \emph{Finite Groups}, 2nd ed., Chelsea, New York, 1980.
+\bibitem{HallHigman} P.~Hall and G.~Higman, On the $p$-length of $p$-soluble groups and reduction theorems for Burnside's problem, \emph{Proc. London Math. Soc. (3)} \textbf{6} (1956), 1--42.
+\bibitem{Ito84} N.~Ito, Hadamard tournaments with transitive automorphism groups, \emph{European J. Combin.} \textbf{5} (1984), 37--42.
+\bibitem{Ito90} N.~Ito, On Hadamard tournaments, \emph{J. Algebra} \textbf{131} (1990), 432--443.
+\bibitem{JLZ} N.~Y.~Javier, B.~Llano and R.~Zuazua, 2- and 3-existentially closed tournaments, \emph{Contrib. Discrete Math.} \textbf{21} (2026), no.~1, 73--90.
+\bibitem{Johnsen} E.~C.~Johnsen, Skew-Hadamard abelian group difference sets, \emph{J. Algebra} \textbf{4} (1966), 388--402.
+\bibitem{Kelly} J.~B.~Kelly, A characteristic property of quadratic residues, \emph{Proc. Amer. Math. Soc.} \textbf{5} (1954), 38--46.
+\bibitem{Lam} C.~W.~H.~Lam, Distance transitive digraphs, \emph{Discrete Math.} \textbf{29} (1980), 265--274.
+\bibitem{Mansilla} S.~P.~Mansilla, Infinite families of non-Cayley vertex-transitive tournaments, \emph{Discrete Math.} \textbf{288} (2004), 99--111. doi:10.1016/j.disc.2004.08.002.
+\bibitem{Marusic} D.~Maru\v{s}i\v{c}, Vertex transitive graphs and digraphs of order $p^k$, in \emph{Cycles in Graphs (Burnaby, B.C., 1982)}, Ann. Discrete Math. \textbf{27}, North-Holland, Amsterdam, 1985, 115--128. doi:10.1016/S0304-0208(08)73001-9.
+\bibitem{McKay} B.~D.~McKay, Combinatorial data: digraphs, \url{https://users.cecs.anu.edu.au/~bdm/data/digraphs.html}. Files \texttt{circtourn27.d6} and \texttt{othervttourn27.d6}, accessed 22 November 2026.
+\bibitem{Muzychuk} M.~Muzychuk, On skew Hadamard difference sets, arXiv:1012.2089 (2010).
+\bibitem{Pasechnik} D.~V.~Pasechnik, Skew-symmetric association schemes with two classes and strongly regular graphs of type $L_{2n-1}(4n-1)$, \emph{Acta Appl. Math.} \textbf{29} (1992), 129--138.
+\bibitem{RB72} K.~B.~Reid and E.~Brown, Doubly regular tournaments are equivalent to skew Hadamard matrices, \emph{J. Combin. Theory Ser. A} \textbf{12} (1972), 332--338.
+\end{thebibliography}
+
+\end{document}

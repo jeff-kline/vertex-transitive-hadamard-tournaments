@@ -1,0 +1,57 @@
+cff-version: 1.2.0
+message: "Please cite Version 0.1.0 of this research repository."
+title: "Ito counterexamples need large fourth powers"
+type: software
+version: 0.1.0
+authors:
+  - family-names: Kline
+    given-names: Jeffery
+repository-code: "https://github.com/jeff-kline/vertex-transitive-hadamard-tournaments"
+url: "https://github.com/jeff-kline/vertex-transitive-hadamard-tournaments"
+license: GPL-3.0-only
+abstract: >-
+  A tournament is doubly regular, or a Hadamard tournament, if every vertex
+  has the same out-degree and every two vertices have the same number of
+  common out-neighbours. In 1984 Ito proved that a vertex-transitive Hadamard
+  tournament has order v = p t^2 for a prime p congruent to 3 mod 4, and
+  raised the possibility that v is always a power of p. An Ito
+  counterexample is a vertex-transitive Hadamard tournament whose order is
+  not a prime power; none is known. The paper proves that for every bound B
+  only finitely many orders of Ito counterexamples have largest fourth-power
+  divisor at most B. If no fourth power of a prime divides v > 1, a
+  vertex-transitive Hadamard tournament of order v exists only when v = p or
+  v = p^3; it is then a Cayley tournament of a p-group, and for cube-free v
+  it is the Paley tournament. If v = p^(2a+1) s^2 with s > 1 squarefree and
+  prime to p, then a >= 4 and p <= 4a - 5. For 3 <= v < 10^5 a
+  vertex-transitive Hadamard tournament of order v exists if and only if v
+  is a prime power congruent to 3 mod 4. Novelty is bounded to the sources
+  searched.
+keywords:
+  - Hadamard tournaments
+  - doubly regular tournaments
+  - skew Hadamard matrices
+  - vertex-transitive
+  - permutation groups
+references:
+  - type: article
+    title: "Hadamard tournaments with transitive automorphism groups"
+    authors:
+      - family-names: Ito
+        given-names: Noboru
+    journal: "European Journal of Combinatorics"
+    volume: 5
+    start: 37
+    end: 42
+    year: 1984
+    doi: "10.1016/S0195-6698(84)80016-5"
+  - type: article
+    title: "Infinite families of non-Cayley vertex-transitive tournaments"
+    authors:
+      - family-names: Mansilla
+        given-names: Sònia P.
+    journal: "Discrete Mathematics"
+    volume: 288
+    start: 99
+    end: 111
+    year: 2004
+    doi: "10.1016/j.disc.2004.08.002"

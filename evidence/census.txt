@@ -1,0 +1,9 @@
+open: []
+orders: 25000
+   1 prime power 4819 
+   2 Ito 18388 
+   3 Theorem B 1622 
+   4 Theorem C 7 [6075, 11907, 29403, 41067, 54675, 70227, 87723]
+   5 prefix bound 29 
+   6 gate 134 
+   7 p r^4 1 [19375]

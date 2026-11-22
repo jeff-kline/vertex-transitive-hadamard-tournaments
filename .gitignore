@@ -1,0 +1,5 @@
+build/
+paper/*.aux
+paper/*.log
+paper/*.out
+.DS_Store
